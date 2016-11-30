@@ -1,0 +1,191 @@
+<!DOCTYPE html><html><head><title>事件</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h4 id="事件">事件</h4>
+
+<p><strong>在用户操作页面的时候，用户为被监听者，浏览器为监听者 来监听用户的操作行为，一旦用户触发了某个行为（click，mousever） 浏览器会去查看触发的这个行为有没有事件绑定函数，如果有执行，否则结果什么都没发生。</strong></p>
+
+
+
+<h5 id="焦点">焦点</h5>
+
+<p><strong>当打开页面的时候就已经有焦点了，默认在document上，当选中焦点元素时，焦点会从document上到焦点元素身上，当离开焦点元素的时候默认回到document身上</strong></p>
+
+<blockquote>
+  <p>onfocus    当输入框得到焦点的时候触发</p>
+  
+  <p>onblur  当输入框失去焦点的时候触发</p>
+  
+  <p>oninput 当输入框内容发生变化的时候触发 IE9以上浏览器兼容（不包括IE9）</p>
+  
+  <p>onchange    当表单控件状态发生变化的时候触发</p>
+  
+  <p>onkeydown   当键盘按下的时候触发  selectedIndex   选中的索引 可读可写 默认从零开始</p>
+  
+  <p>onkeyup 当键盘抬起的时候触发</p>
+  
+  <p>focus() 聚焦 默认选中</p>
+  
+  <p>blur()  失焦</p>
+  
+  <p>input.select()/textarea.select()    选中input或textarea中的内容</p>
+</blockquote>
+
+
+
+<h4 id="event-事件对象-事件源">event： 事件对象 (事件源)</h4>
+
+<p><strong>当用户操作某个元素的时候，如果该元素有事件绑定函数，那么在这个函数中的第一个形参记录了用户操作时的细节问题。</strong></p>
+
+<p><em>它是一个对象：如：鼠标mouseEvent()</em></p>
+
+<blockquote>
+  <p>ev.clientY 可视区的Y轴坐标（注意：当页面的滚动高度发生变化的时候，这个值依然不变）</p>
+  
+  <p>ev.pageY   页面的Y轴坐标（注意：当页面的滚动高度发生变化的时候，这个值会随着滚动的距离发生变化）</p>
+  
+  <p>ev.keyCode  当按键时，如果在按键的基础上又按了一个键值，这个时候第二次会把第一次的键值覆盖keyCode只认最后一次的按键键值。</p>
+  
+  <p>特殊键值： ev.altKey    ev.shiftKey    ev.ctrlKey    他们的默认键值为false 一旦按下 就变为true</p>
+</blockquote>
+
+
+
+<h4 id="事件绑定">事件绑定</h4>
+
+<blockquote>
+  <p>obj.addEventListener(事件名[不带on],事件绑定函数,是否捕获[默认为不捕获:false]);</p>
+</blockquote>
+
+<p><strong>注意：如果绑定的函数名一样，那么同样的会被覆盖，否则绑定几次就执行几次事件绑定函数</strong></p>
+
+
+
+<h4 id="事件解除">事件解除</h4>
+
+<blockquote>
+  <p>obj.removeEventListener(“要解除哪个事件”，哪个函数，是否捕获[默认为不捕获 false]);</p>
+  
+  <p>传统的事件解除，将某个元素的事件赋值为null即可</p>
+</blockquote>
+
+<p>事件绑定解除：如果要解除事件绑定的函数，那么在绑定的时候 <strong>第二个参数必须为函数名</strong></p>
+
+
+
+<h3 id="事件流事件模型">事件流（事件模型）</h3>
+
+
+
+<h5 id="冒泡">冒泡:</h5>
+
+<blockquote>
+  <p>当在某个元素身上触发了某个事件并且这个元素身上有事件绑定函数，那么不但会执行这个函数，还会从当前元素向上(从父级)执行这个事件如果向上的祖先节点也有同样事件绑定函数，那么一直执行，直到window结束</p>
+</blockquote>
+
+
+
+<h5 id="捕获">捕获:</h5>
+
+<blockquote>
+  <p>从window开始，向下传递，直到目标点的这个过程就叫捕获 </p>
+</blockquote>
+
+<p><strong>传统添加事件绑定函数的时候只有冒泡过程可以监听到，捕获过程不能监听到的</strong></p>
+
+<blockquote>
+  <p>当某个元素事件被触发的时候，从捕获阶段到冒泡阶段的整个过程就叫做事件流(事件模型)  从window起 到window结束</p>
+  
+  <p>如果事件绑定函数为一个匿名函数，那么有多个相同的事件元素，那么会依次触发  如果为有名函数，那么只会执行一次</p>
+  
+  <p>如果目标点相同事件并且有多个事件绑定函数，那么会按顺序依次执行</p>
+  
+  <p>如果不是目标点，那么会走事件流机制，先捕获后冒泡，如果捕获或者冒泡有多个事件绑定函数(同一个事件)，那么会按顺序依次执行</p>
+</blockquote>
+
+
+
+<h4 id="阻止冒泡">阻止冒泡:</h4>
+
+<blockquote>
+  <p>ev.cancelBubble    因为冒泡是个向上的过程(一般都是触发了子级的事件绑定函数，不让祖先级的事件绑定函数触发) <br>
+  <strong>阻止冒泡一般都在自身设置</strong></p>
+  
+  <p>ev.cancelBubble = true 不是标准 但是所有浏览器都兼容 <br>
+  ev.stopPropagation()；是标准  但是低版本(ie) 不兼容 <br>
+  ev.target 事件源(事件监听,事件委托)   触发事件的源头</p>
+  
+  <p><strong>监听事件源只能监听父级中的子级，父级的兄弟元素是监听不到父级中的子元素的</strong></p>
+</blockquote>
+
+
+
+<h5 id="浏览器的默认行为">浏览器的默认行为:</h5>
+
+<blockquote>
+  <p>我们没有让它那么做，浏览器偷偷地帮我们做了某些事情，这样的事叫做默认行为</p>
+  
+  <p>浏览器的默认行为是指非JS添加的默认就有的一些功能</p>
+</blockquote>
+
+<h5 id="解决浏览器默认行为">解决浏览器默认行为：</h5>
+
+<blockquote>
+  <p>传统的事件绑定：return false 注意：要解除默认行为，要找到触发浏览器默认行为的源头</p>
+  
+  <pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">document</span>.onkeydown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>) </span>{<br>    <span class="hljs-keyword">if</span>(ev.keyCode == <span class="hljs-number">32</span>){<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br>}<br></code></pre>
+  
+  <p>事件绑定的情况下： ev.preventDefault();   <strong>低版本IE不支持</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">document</span>.oncontextmenu = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>}; <span class="hljs-comment">//阻止默认右键行为</span><br></code></pre>
+
+
+
+<h5 id="拖拽三大事件">拖拽三大事件：</h5>
+
+<p>onmousedown (按下)  onmousemove (移动)  onmouseup (抬起)  <br>
+  <strong>记得阻止默认样式  return false；</strong></p>
+
+
+
+<h6 id="范围限制">范围限制：</h6>
+
+<pre class="prettyprint hljs-dark"><code class="hljs applescript"><span class="hljs-keyword">if</span> (t &lt; <span class="hljs-number">0</span>) {<br>    t = <span class="hljs-number">0</span>;<br>} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (t &gt; document.documentElement.clientHeight - <span class="hljs-keyword">div</span>.clientHeight) {<br>    t = document.documentElement.clientHeight - <span class="hljs-keyword">div</span>.clientHeight;<br>}<br></code></pre>
+
+
+
+<h6 id="磁力吸附">磁力吸附：</h6>
+
+<blockquote>
+  <p>还没到顶边就强行拉到顶边</p>
+</blockquote>
+
+
+
+<h6 id="碰撞检测">碰撞检测：</h6>
+
+<blockquote>
+  <p>排除法</p>
+</blockquote>
+
+<h4 id="滚轮">滚轮:</h4>
+
+<blockquote>
+  <p>scrollHeight 内容撑开的高度</p>
+  
+  <p>onmousewheel: chrome和ie 兼容   </p>
+  
+  <p>e.wheelDelta 可以检测用户滚动的方向       </p>
+  
+  <p>滚动事件  上滚动: 正值   下滚动: 负值    上滚动为正值  下滚动为负值</p>
+  
+  <p>DOMMouseScroll 必须用事件绑定写  ff兼容</p>
+  
+  <p>e.detail 可以检测到用户的滚动方向</p>
+  
+  <p>下滚动为正值    上滚动为负值   </p>
+</blockquote></div></body></html>
