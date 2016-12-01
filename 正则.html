@@ -1,0 +1,148 @@
+<!DOCTYPE html><html><head><title>正则</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h2 id="正则">正则</h2>
+
+<blockquote>
+  <p>主要用来匹配(擅长匹配模糊范围的)字符串，是一种规则，效率更高 速度快，但是，可维护性较差 （因为读起来很费劲）</p>
+  
+  <p>string[i] 在IE6下不支持，所以用string.charAt(i)</p>
+  
+  <p>isNaN 判断是不是NaN</p>
+</blockquote>
+
+
+
+<h4 id="什么是正确表达式">什么是正确表达式:</h4>
+
+<blockquote>
+  <p>规则表达式</p>
+  
+  <p>查找匹配某些符合规则的字符串，正则表达式</p>
+  
+  <h6 id="写法一">写法一  :</h6>
+  
+  <p>简写：/规则/</p>
+  
+  <h6 id="写法二">写法二 :</h6>
+  
+  <p>new RegExp(字符串的规则,修饰符)    如果在字符串中有\必须转义  new RegExp(“\s”)</p>
+  
+  <p>match 将匹配到的字符放到一个数组中</p>
+</blockquote>
+
+
+
+<h4 id="修饰符">修饰符：</h4>
+
+<blockquote>
+  <p>g -&gt; global 全局</p>
+  
+  <p>i 忽略大小写  <strong>不分前后</strong></p>
+</blockquote>
+
+
+
+<h4 id="量词">量词：</h4>
+
+<blockquote>
+  <p>+：最少有1个，最多不限</p>
+  
+  <p>?：最少可以没有，最多可一个，可有可无</p>
+  
+  <p>n,m}：n:最小 m:最大   </p>
+  
+  <p>{n,}  最少是多少 最多不限 </p>
+  
+  <p>{1,} 最少1次 最多不限 +</p>
+  
+  <p>{0,1} 最少0次 最多1次 ？</p>
+  
+  <p>{0,} 最少可以没有  最多无限</p>
+  
+  <p>注意： <br>
+        <strong>量词都是修饰前面那个规则的 </strong></p>
+  
+  <p>比如：  <br>
+     a*  a可以没有也可以无限</p>
+  
+  <p>[a-z]* a-z 可以没有也可以无限</p>
+  
+  <p>\d2+  一个数字和至少1个2</p>
+</blockquote>
+
+
+
+<h4 id="转义符">转义符：</h4>
+
+<blockquote>
+  <p>\n 换行</p>
+</blockquote>
+
+
+
+<h4 id="特殊的转义符">特殊的转义符：</h4>
+
+<blockquote>
+  <p>\d 一个数字</p>
+  
+  <p>\D 非数字 <br>
+  () 子项  从左往右依次计算    只要在正则有子项，那么replace回调函数中的第二个参数开始，就是匹配到的子项(不再是索引)    括号除了子项，还有提权</p>
+  
+  <p>()\1 重复子项</p>
+  
+  <p>[] 里面若干个找任意一个</p>
+  
+  <p>[] + ^ 排除 [^2]     排除2</p>
+  
+  <p>^ 开头</p>
+  
+  <p>$ 结尾</p>
+  
+  <p>\s 空格</p>
+  
+  <p>\S 非空格</p>
+  
+  <p>\b 在数字，字母，下划线中是有边界符</p>
+  
+  <p>\B 非边界符</p>
+  
+  <p>. 任意一个字符(除了\n)</p>
+  
+  <p><strong>中文的区间范围 /[\u4e00-\u9fa5]/</strong></p>
+</blockquote>
+
+
+
+<h4 id="正则的特性">正则的特性：</h4>
+
+<blockquote>
+  <p>懒惰：匹配到某个规则之后，那么直接返回。</p>
+  
+  <p>贪婪：会一直找量词中的字符，有多少就匹配多少</p>
+</blockquote>
+
+
+
+<h4 id="正则方法">正则方法：</h4>
+
+<blockquote>
+  <p>1.test  查看正则表达式与指定的字符串是否匹配，如果是返回一个布尔值(true)，否则false</p>
+  
+  <p>2.search 找到字符串中指定字符(正则)的位置 找到返回位置，没找到返回-1      str.search(“”||re)</p>
+  
+  <p>3 replace <br>
+  <span>$</span>0就为正则每次匹配到的字符 <br>
+  <span>$</span>1就为每次匹配到字符的位置 index <br>
+  <span>$</span>2整个字符串 all <br>
+  <span>$</span>3 undefined 在此之后都是未定义 <br>
+   回调中必须写return 不然会为undefined <br>
+   函数默认返回值为undefined 必须要写</p>
+  
+  <blockquote>
+    <p>正则中的或 是 |</p>
+  </blockquote>
+</blockquote></div></body></html>
