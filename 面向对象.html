@@ -1,0 +1,149 @@
+<!DOCTYPE html><html><head><title>面向对象</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="面向对象">面向对象</h3>
+
+<blockquote>
+  <p><strong>是一种编程思想，每个的角度不一样，理解也不一样（因为每个人的角度不同，看待同一个问题的结果就不同）</strong></p>
+  
+  <p>大牛版： 面向对象是一种对现实世界理解和抽象的方法</p>
+  
+  <p>换一种（写法）思想去写代码，可能在某个时间点上结果是一样，但是经过多次迭代结果一定不一样，用面向对象的 写法会越写越简单，而用面向过程越写越复杂。</p>
+  
+  <p><strong>把具有相同特征的代码抽离出来封装为一类，在这一类上扩充方法或者属性，让这一类（功能）更强大</strong></p>
+</blockquote>
+
+
+
+<h4 id="js中的三大特征">js中的三大特征：</h4>
+
+<blockquote>
+  <p>封装，继承，多态 （第四种 抽象）</p>
+  
+  <p>属性一定是在某个非空对象上的。   null为空    var arr = []; 属性   属于 空白对象 [] {}</p>
+  
+  <p>属性或者方法前面都是有主的，都是挂在某个对象上的。</p>
+</blockquote>
+
+
+
+<h4 id="new">new：</h4>
+
+<blockquote>
+  <p>运算符   专门运算函数的。</p>
+  
+  <p>用了new之后函数可以不用加括号就能调用 new运算之后的()括号，主要是为了传参用的</p>
+  
+  <p>new之后偷偷的在函数内容创建了一个空白对象</p>
+  
+  <p>new之后函数的默认返回值就为new出来的这个对象。</p>
+  
+  <p>return之后如果后面跟着为对象类型也包括函数，那么范围值就为return后面的值 否则就返回new出来的对象</p>
+  
+  <p>new之前this是window new之后是对象</p>
+  
+  <p>对象和对象是不相等的   [] != [];</p>
+</blockquote>
+
+<h4 id="原型">原型：</h4>
+
+<blockquote>
+  <p>构造函数：这个函数专门拿来构造一个对象的</p>
+  
+  <p>工厂函数：有原材料，有加工，有出厂的函数</p>
+  
+  <p><strong>prototype</strong> 原型 <br>
+  给某个类定义一个class</p>
+  
+  <p>prototype是给这个类的实例化对象使用的。(自身用不了)；</p>
+  
+  <p>当一个函数被申明的时候，该函数下默认有一个属性：prototype，（该属性的值是一个<strong>对象</strong>）当我们去调用一个对象的属性或者方法的时候，如果该对象自身没有该属性或者方法，则会调用到该对象的构造函数下的prototype下面属性或者方法</p>
+</blockquote>
+
+<h4 id="原型链">原型链 ：</h4>
+
+<blockquote>
+  <p>__proto__   对象有原型链 (对象与构造函数原型的桥梁)    函数有原型    对象没有原型只有链 </p>
+  
+  <p>碰到对象找原型链，碰到函数找原型 (始终要遵循，原型只给这个类的实例化对象用)</p>
+  
+  <p>如果是找对象，那么会先找链 -&gt; 构造函数的原型 -&gt; 构造函数的原型的链 -&gt; 对象的原型</p>
+  
+  <p>如果是找函数：那么会先找链(因为函数的原型是给这个函数的实例化对象使用的)</p>
+  
+  <h5 id="构造函数的原型">构造函数的原型：</h5>
+  
+  <p>Function -&gt; Function.prototype -&gt; Function.prototype.__proto__ -&gt; Object.prototype</p>
+  
+  <p>Function.say -&gt;  Function.__proto__ -&gt; Function.prototype</p>
+  
+  <p>Array.__proto__ -&gt; Function.prototype -&gt; Function.prototype.__proto__ -&gt; Object.prototype</p>
+  
+  <p>arr.say -&gt; arr.say -&gt;  arr.__proto__ -&gt; Array.prototype -&gt; Array.prototype.__proto__   -&gt; Object.prototype  -&gt; obj</p>
+  
+  <p>Array.say -&gt; Array.<strong>proto</strong> -&gt; Function.prototype</p>
+</blockquote>
+
+<h4 id="包装对象">包装对象</h4>
+
+<blockquote>
+  <p>str.length  -&gt; new String()  -&gt;  length -&gt; 2个 -&gt; str</p>
+  
+  <p><strong>当简单类型去查看某个属性或者方法的时候，系统会偷偷地将这个简单类型转换成对象类型的对象，从这个对象去查找要查看的结果，之后这个包装对象自动销毁 这个被销毁的对象为包装对象，整个过程就是简单类型也能查看(调用) 某个属性或者方法的原理</strong></p>
+</blockquote>
+
+
+
+<h5 id="什么是包装对象">什么是包装对象：</h5>
+
+<blockquote>
+  <p>当使用原始类型的值(string,number,boolean),在调用对应属性和方法的时候，内部会自动转成对象的对象隐式创建的这个对象，就成为包装对象</p>
+  
+  <p>内置的对象  String 、Number 、Boolean</p>
+</blockquote>
+
+<h5 id="包装对象的特点">包装对象的特点：</h5>
+
+<blockquote>
+  <p>隐式创建对象后，可以调用对应的属性和方法，使用后，立马销毁，所有不能给原始类型的值添加属性和方法</p>
+  
+  <p>添加属性和方法</p>
+  
+  <p>String -&gt; 字符串 <br>
+  Array -&gt; 数组 <br>
+  Object -&gt; 对象 <br>
+  Number -&gt; 数字</p>
+  
+  <p>内置对象： 只能读取 不能随意修改</p>
+  
+  <p>hasOwnProperty：查看某个属性是不是这个对象自身的。</p>
+  
+  <p><strong>自身，一定是在当前这个对象中（不会沿着原型链查找属性，只查找自身属性</strong></p>
+  
+  <p>因为简单类型的赋值就是赋值     简单类型的赋值是不会影响另一个数据而对象类型的赋值是赋址    对象类型赋值都是引用一个内存地址，所以说，改变arr2，同样会改变arr</p>
+  
+  <p>解决：通过循环，将对象中每个简单类型赋值给另一个对象，就不会出现引用关系。   for in</p>
+  
+  <p><em>* 写个函数，只要是复合类型，就继续循环，否则直接赋值*</em></p>
+  
+  <h5 id="call">call：</h5>
+  
+  <p>方法： 当某个函数声明的时候系统就默认给这个函数加了一些属性或者方法</p>
+  
+  <p>参数： 有无数个参数</p>
+  
+  <p>第一个参数：可以改变this指向 <br>
+  第二个参数：为实参，有几个实参就写几个实参。</p>
+  
+  <p>函数会被： 事件调用，函数名+括号、定时器、匿名函数自执行、new、call、apply</p>
+  
+  <h5 id="apply">apply：</h5>
+  
+  <p>只有两个参数：</p>
+  
+  <p>第一个参数： 改变this指向（你写什么this就是什么） <br>
+  第二个参数： 是个数组[]    是实参的集合，有几个形参就在数组中写几个对应的实参。</p>
+</blockquote></div></body></html>
