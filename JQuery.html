@@ -2,6 +2,8 @@
                         
                     
 
+
+
 <h3 id="jquery">JQuery：</h3>
 
 <blockquote>
@@ -67,4 +69,75 @@
   <p><strong>[name$=”value”]</strong>: 获取以value结尾</p>
   
   <p><strong>[name^=”value”]</strong>: 获取以value开头</p>
-</blockquote></div></body></html>
+</blockquote>
+
+
+
+<h5 id="伪类的">伪类的：</h5>
+
+<blockquote>
+  <p><strong>元素：</strong></p>
+  
+  <p>找到inpput中为submit -&gt; $(“input:submit”)</p>
+  
+  <p>$(“input:checked”) 找到input为选中的</p>
+  
+  <p>奇数 -&gt; odd   从0开始算的</p>
+  
+  <p>偶数 -&gt; even  从0开始算的</p>
+  
+  <p>li:gt(index) -&gt; 找到大于索引的元素</p>
+  
+  <p>li:lt(index) -&gt; 找到小于索引的元素</p>
+  
+  <p>找到的是大于或者小于，但是排除等于</p>
+  
+  <p><strong>1.不带on+事件名+()</strong>； <br>
+  <strong>2.on(“click”,function(){})</strong></p>
+  
+  <p>分清是JQ对象还是原生对象 <br>
+  知道JQ对象上的方法有什么效果</p>
+</blockquote>
+
+
+
+<h5 id="attr属性">attr：属性:</h5>
+
+<blockquote>
+  <p>一个参数： 获取 <br>
+  两个参数： 设置</p>
+</blockquote>
+
+
+
+<h5 id="valvalue">val:value:</h5>
+
+<blockquote>
+  <p>$.val() 获取</p>
+  
+  <p>$.val(“写东西”) 设置</p>
+  
+  <p>checked为内存中的属性，直接在页面设置checked为false的时候是没用的 那么，就不能用attr.prop()</p>
+  
+  <p>prop(): 专门用来读、写checked</p>
+  
+  <p>text() -&gt; 专门操作文字，就算写上标签也会转成字符串放到元素中</p>
+  
+  <p>html() -&gt; innerHTML</p>
+  
+  <h6 id="val-只能操作表单元素">val() -&gt; 只能操作表单元素</h6>
+  
+  <p>如果直接调用，读</p>
+  
+  <p>传入字符串为写</p>
+</blockquote>
+
+<p><strong>JQ不但可以在浏览器环境下用，还可以在node环境中用</strong></p>
+
+<p><strong>闭包传参的优点：</strong> <br>
+访问速度更快，不会一层一层往上找</p>
+
+<p><strong>noGlobal：</strong> <br>
+因为在低版本浏览器下undefined会被修改，那么当函数没有传参的时候，就是undefined，一定不会被修改</p>
+
+<p><strong>Sizzle:选择器</strong></p></div></body></html>
