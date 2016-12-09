@@ -140,4 +140,55 @@
 <p><strong>noGlobal：</strong> <br>
 因为在低版本浏览器下undefined会被修改，那么当函数没有传参的时候，就是undefined，一定不会被修改</p>
 
-<p><strong>Sizzle:选择器</strong></p></div></body></html>
+<p><strong>Sizzle:选择器</strong></p>
+
+
+
+<h4 id="节点">节点：</h4>
+
+<blockquote>
+  <p><strong>first()</strong>  一堆里面的第一个</p>
+  
+  <p><strong>last()</strong>   一堆里面的最后一个</p>
+  
+  <p><strong>slice()</strong>  从哪开始到哪结束，但不包含这位</p>
+  
+  <p><strong>prev()</strong> 某个元素的上一个节点</p>
+  
+  <p><strong>next()</strong> 某个元素的下一个节点</p>
+  
+  <p><strong>children()</strong> 某个元素下的所有节点  如果有指定的子元素要获取，那么括号中可以赛选 children(“p”) (“[name=”p”]”)</p>
+  
+  <p><strong>find()</strong> 类似tageName  找到某个元素下的指定 子元素 或 孙元素</p>
+  
+  <p><strong>$(子级).parent()</strong> 找到某个子级的父节点</p>
+  
+  <p><strong>$(子级).parents(筛选)</strong>  批量查找父级节点   筛选：指定的祖先级节</p>
+  
+  <p><strong>$closest()</strong> 从自身开始查找，找离得最近的父级</p>
+  
+  <p><strong>$(“</strong></p><li></li>“)创建元素<p></p>
+  
+  <p><strong>$(父级).append(子级)</strong>;  添加到父级的末尾  如果需要链式操作，那么this是父级</p>
+  
+  <p><strong>$(子级).appendTo(父级)</strong></p>
+  
+  <p><strong>$(添加到谁的前面).before(添加谁)</strong></p>
+  
+  <p><strong><span>$</span>li.insertBefore(<span>$</span>(“#ul”)) (添加谁).insertBefore$(添加到谁的前面)</strong></p>
+  
+  <p><strong><span>$</span>(“#ul”).after($li)</strong>    </p>
+  
+  <p><strong><span>$</span>(添加到谁的后面).after(添加谁)</strong></p>
+  
+  <p><strong>$(“”).insertAfter()</strong></p>
+  
+  <p><strong>remove  要删除谁</strong> <br>
+  <strong>clone(true)</strong> 原生的只能克隆内容，不能克隆事件</p>
+  
+  <p><strong>$(this).index()</strong>:  index相对父级，当前这个広排第几位</p>
+  
+  <p><strong>先将ul缓冲起来，再通过find查找</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery">var <span class="hljs-variable">$ul</span> = $(<span class="hljs-string">"ul"</span>)<br></code></pre></div></body></html>
