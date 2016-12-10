@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+	#list li {
+		margin: 15px 0;
+	}
+</style>
+</head>
+<body>
+	<ul id="list">
+		<li>
+			<span>1111</span>
+			<input type="button" value="上移" class="prev">
+			<input type="button" value="下移" class="next">
+		</li>
+		<li>
+			<span>2222</span>
+			<input type="button" value="上移" class="prev">
+			<input type="button" value="下移" class="next">
+		</li>
+		<li>
+			<span>3333</span>
+			<input type="button" value="上移" class="prev">
+			<input type="button" value="下移" class="next">
+		</li>
+		<li>
+			<span>4444</span>
+			<input type="button" value="上移" class="prev">
+			<input type="button" value="下移" class="next">
+		</li>
+		<li>
+			<span>5555</span>
+			<input type="button" value="上移" class="prev">
+			<input type="button" value="下移" class="next">
+		</li>
+		<li>
+			<span>6666</span>
+			<input type="button" value="上移" class="prev">
+			<input type="button" value="下移" class="next">
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="JQ/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+(function() {
+	var $li = $("li"),
+		$prev = $(".prev"),
+		$next = $(".next");
+
+	var arr = [];
+
+	$li.each(function(i,e) {
+		arr[i] = {
+			left: $(e).offset().left,
+			top: $(e).offset().top
+		}
+
+		$(e).css({
+			left: $(e).offset().left,
+			top: $(e).offset().top
+		});
+
+		$(e).attr("index",i);
+	});
+
+	$li.css("position","absolute");
+
+	$prev.click(function() {
+		var _this = $(this);
+
+		var $prev = $(_this).parent().prev();
+
+		if ($prev.length) {
+			var	index = $(_this).parent().attr("index"),
+				Pindex = $prev.attr("index");
+
+			$(this).parent().animate({
+				top: arr[Pindex].top
+			},function() {
+				_this.parent().insertBefore($prev);
+			});
+
+			$prev.animate({
+				top: arr[index].top
+			})
+
+			_this.parent().attr("index",Pindex);
+			$prev.attr("index",index);
+
+		} else {
+			// var last = $li.last().attr("index");
+			$("#list").append(_this.parent());
+			$('li').each(function(i,e){
+				$(e).attr('index',i);
+				(function(i){
+					$(e).stop().animate({
+						top:arr[i].top
+					});
+				})(i);
+			});
+		}
+	});
+
+	$next.click(function() {
+		var _this = $(this);
+
+		var $next = $(this).parent().next();
+
+		if ($next.length) {
+			var	index = $(this).parent().attr("index"),
+				Nindex = $next.attr("index");
+
+			$(this).parent().animate({
+				top: arr[Nindex].top
+			},function() {
+				_this.parent().insertAfter($next);
+			});
+
+			$next.animate({
+				top: arr[index].top
+			})
+
+			$(this).parent().attr("index",Nindex);
+			$next.attr("index",index);
+		} else {
+			// var first = $li.first().attr("index");
+			$("#list").prepend(_this.parent());
+			$('li').each(function(i,e){
+				$(e).attr('index',i);
+				(function(i){
+					$(e).stop().animate({
+						top:arr[i].top
+					});
+				})(i);
+			});
+		}
+	});
+})();
+</script>
+</html>

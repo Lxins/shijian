@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+	#wrap {
+		position: relative;
+		width: 684px;
+		height: 684px;
+		background: url(images/bg.jpg) no-repeat;
+		margin: 30px auto;
+	}
+	#box {
+		position: absolute;
+		left: 55px;
+		top: 50px;
+	}
+	.box div{
+		width: 142px;
+		height: 142px;
+	}
+	.box1 div {
+		float: left;
+	}
+	.box1 div:nth-of-type(1) {
+		background: url(images/1.png) no-repeat;
+	}
+	.box1 div:nth-of-type(2) {
+		background: url(images/2.png) no-repeat;
+	}
+	.box1 div:nth-of-type(3) {
+		background: url(images/4.png) no-repeat;
+	}
+	.box1 div:nth-of-type(4) {
+		background: url(images/3.png) no-repeat;
+	}
+	.box2 {
+		position: absolute;
+		left: 426px;
+		top: 142px;
+	}
+	.box2 div:nth-of-type(1) {
+		background: url(images/5.png) no-repeat;
+	}
+	.box2 div:nth-of-type(2) {
+		background: url(images/6.png) no-repeat;
+	}
+	.box2 div:nth-of-type(3) {
+		background: url(images/7.png) no-repeat;
+	}
+	.box3 {
+		position: absolute;
+		left: 0;
+		top: 426px;
+	}
+	.box3 div {
+		float: right;
+	}
+	.box3 div:nth-of-type(1) {
+		background: url(images/8.png) no-repeat;
+	}
+	.box3 div:nth-of-type(2) {
+		background: url(images/6.png) no-repeat;
+	}
+	.box3 div:nth-of-type(3) {
+		background: url(images/3.png) no-repeat;
+	}
+	.box4 {
+		position: absolute;
+		left: 0;
+		top: 142px;
+	}
+	.box4 div:nth-of-type(1) {
+		position: absolute;
+		left: 0;
+		top: 142px;
+		background: url(images/1.png) no-repeat;
+	}
+	.box4 div:nth-of-type(2) {
+		background: url(images/7.png) no-repeat;
+	}
+	a {
+		position: absolute;
+		width: 284px;
+		height: 284px;
+		left: 50%;
+		top: 100%;
+		margin-left: -142px;
+	}
+	.box div.active {
+		background-color: red;
+	}
+</style>
+<script type="text/javascript" src="JQ/jquery-3.1.1.js"></script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="box">
+			<div class="box box1">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="box box2">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="box box3">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="box box4">
+				<div></div>
+				<div></div>
+			</div>
+			<a href="javascript:;"></a>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+(function() {
+	function Tab(box) {
+		this.box = $(box);
+		this.div = this.box.find("div");
+
+		this.num = -1;  // 默认为0的话 有bug (没解决)
+	};
+
+	Tab.prototype.init = function() {
+		var _this = this;
+		$btn = $("a");
+		$btn.click(function() {
+			_this.click();
+		});
+	};
+
+	Tab.prototype.click = function() {
+		var _this = this;
+
+		var time = 30;
+		clearInterval(_this.timer);
+		this.timer = setInterval(timer,time)
+		function timer() {
+			_this.Time(time);
+		}
+	};
+
+	Tab.prototype.Time = function(time) {
+		var _this = this;
+
+		this.div.each(function(i,e) {
+			$(e).attr("class","");
+		});
+
+		this.num++;
+
+		_this.div.eq(this.num).attr("class","active");
+
+		if (this.num > this.div.length - 1) {
+			_this.num = -1;
+		}
+
+		if (_this.num == _this.div.length - 1) {
+			clearInterval(_this.timer);
+			clearInterval(_this.time);
+
+			_this.num = -1;
+			return this.Time;
+		}
+	};
+
+	var t = new Tab(".box");
+	t.init();
+})();
+</script>
+</html>

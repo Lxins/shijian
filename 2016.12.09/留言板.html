@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	body,
+	p {
+		margin: 0;
+	}
+	textarea {
+		border: 1px solid #ccc;
+		margin: 0;
+		padding: 0;
+		display: block;
+		resize: none;
+		overflow: auto;
+	}
+
+
+	#wrap {
+		width: 600px;
+		margin: 80px auto;
+	}
+	#head {
+		height: 60px;
+		font: 36px/60px "宋体";
+		text-align: center;
+		color: skyblue;
+		background: yellowgreen;
+	}
+	#message {
+		background: #fbf207;
+	}
+	.mes {
+		width: 570px;
+		margin: 0 15px;
+		padding: 15px 0;
+	}
+	.info {
+		height: 80px;
+		font: 24px/80px "宋体";
+		text-align: center;
+		background: #0bcfe0;
+		margin: 15px 0;
+	}
+	.list {
+		max-height: 600px;
+		overflow: auto;
+	}
+	.list li {
+		height: 60px;
+		font: 14px/30px "宋体";
+		background: #0bcfe0;
+		margin: 6px 0;
+	}
+	.list li header {
+		height: 30px;
+		background: #17fe3d;
+		padding: 0 6px;
+		overflow: hidden;
+	}
+	header span:nth-of-type(1) {
+		float: left;
+	}
+	header span:nth-of-type(2) {
+		float: right;
+	}
+	.list li p {
+		padding: 0 6px;
+		overflow: hidden;
+	}
+	p span {
+		float: left;
+	}
+	p a {
+		float: right;
+		color: #eee;
+		display: none;
+	}
+	.inp #name {
+		width: 546px;
+		height: 30px;
+		padding: 0 10px;
+	}
+	.inp #text {
+		width: 550px;
+		min-height: 60px;
+		font: 16px/24px "宋体";
+		padding: 0 10px;
+		margin: 15px 0;
+	}
+	.inp #btn {
+		width: 570px;
+		height: 40px;
+		font: bold 24px/40px "宋体";
+		text-align: center;
+		background: #13bf89;
+
+	}
+</style>
+<script type="text/javascript" src="JQ/jquery-3.1.1.js"></script>
+</head>
+<body>
+	<section id="wrap">
+		<header id="head">留言板</header>
+		<div id="message">
+			<div class="mes">
+				<div class="info">— 抢沙发啊 —</div>
+				<ul class="list">
+					<!-- <li>
+						<header>11</header>
+						<p>111</p>
+					</li>
+					<li>
+						<header>11</header>
+						<p>111</p>
+					</li><li>
+						<header>11</header>
+						<p>111</p>
+					</li><li>
+						<header>11</header>
+						<p>111</p>
+					</li> -->
+				</ul>
+				<div class="inp">
+					<input type="text" id="name" placeholder="请输入名字">
+					<textarea id="text" placeholder="请输入内容"></textarea>
+					<div id="btn">确定</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+<script type="text/javascript">
+(function() {
+	function Tab(id) {
+		this.$message = $(id);
+		this.$info = this.$message.find(".info");
+		this.$inp = this.$message.find(".inp");
+		this.$list = this.$message.find(".list");
+
+		this.$name = this.$inp.find("#name");
+		this.$text = this.$inp.find("#text");
+		this.$btn = this.$inp.find("#btn");
+
+		this.init();
+	}
+
+	Tab.prototype.init = function() {
+		var _this = this;
+		this.$btn.click(function() {
+			_this.fnClick();
+		});
+	}
+
+	Tab.prototype.fnClick = function() {
+		var _this = this;
+		this.$info.slideUp("500",function() {
+			var $Nval = _this.$name.val(),
+				$Tval = _this.$text.val();
+
+			var $li = $("<li></li>");
+
+			$(_this.$list).append($li);
+			$li.html("<header><span>"+$Nval+"</span><span>"+$li.index()+"</span></header><p><span>"+$Tval+"</span><a>删除</a></p>");
+
+			_this.$name.val("");
+			_this.$text.val("");
+
+			_this.fnOver();
+		});
+	};
+
+	Tab.prototype.fnOver = function() {
+		$("li").mouseover(function() {
+			$(this).find("p a").show();
+		});
+
+		$("li").mouseout(function() {
+			$(this).find("p a").hide();
+		});
+		this.mover($("li").find("p a"));
+	};
+
+	Tab.prototype.mover = function($a) {
+		$a.click(function() {
+			var $li = $(this).parent().parent();
+			$li.remove();
+			$("li").each(function(i,e) {
+				console.log(i)
+				$(e).find("span").eq(1).text(i);
+			})
+		});
+
+	};
+
+	new Tab("#message");
+})();
+</script>
+</html>

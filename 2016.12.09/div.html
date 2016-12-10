@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+		<div>6</div>
+		<div>7</div>
+		<div>8</div>
+		<div>9</div>
+		<div>10</div>
+	</div>
+</body>
+<script type="text/javascript" src="JQ/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+(function() {
+	var $box = $("#box");
+	var $div = $box.find("div");
+
+	$box.css({
+		width: 1100,
+		margin: "80px auto"
+	})
+
+	$div.css({
+		float: "left",
+		width: 100,
+		height: 100,
+		font: "28px/100px 宋体",
+		textAlign: "center",
+		background: "skyblue",
+		margin: "0 3px"
+	});
+
+	$div.each(function(i,e) {
+		var divT = $(e).offset().top + "px";
+		var divL = $(e).offset().left + "px";
+
+		$(e).css({
+			left: divL,
+			top: divT
+		})
+	})
+
+	$div.css({
+		position: "absolute",
+		margin: "0"
+	});
+
+	// $div.click(function() {
+	// 	$(this).css({
+	// 		top: "450px",
+	// 		transition: "1.5s"
+	// 	});
+	// 	Prev($(this));
+	// 	Next($(this));
+	// });
+
+	// function Prev(prev) {
+	// 	var prev = prev.prev();
+	// 	if (prev) {
+	// 		setInterval(function() {
+	// 			prev.css({
+	// 				top: "450px",
+	// 				transition: "1.5s"
+	// 			});
+	// 			Prev(prev);
+	// 		},300);
+	// 	}
+	// };
+
+	// function Next(next) {
+	// 	var next = next.next();
+	// 	if (next) {
+	// 		setInterval(function() {
+	// 			next.css({
+	// 				top: "450px",
+	// 				transition: "1.5s"
+	// 			});
+	// 			Next(next);
+	// 		},300);
+	// 	}
+	// };
+
+
+	$div.click(function() {
+		$(this).animate({top:"+450px"},1100);
+		var num = $(this).index();
+		var nub = $(this).index();
+		// console.log($(this).prev()[0])
+
+		if ($(this).prev()) {
+			var timer = setInterval(function() {
+				console.log(num)
+				$div.eq(num).prev().animate({top:"+450px"},1000);
+				num--;
+				if (num < 0) {
+					clearInterval(timer);
+				}
+			},300)
+		}
+
+		if ($(this).next()) {
+			var time = setInterval(function() {
+				console.log(nub)
+				$div.eq(nub).next().animate({top:"+450px"},1000);
+				nub++;
+				if (nub > $div.length - 1) {
+					clearInterval(time);
+				}
+			},300)
+		}
+	})
+})();
+</script>
+</html>

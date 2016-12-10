@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+	.hide {
+		display: none;
+	}
+	.show {
+		display: block;
+	}
+</style>
+</head>
+<body>
+	<ul id="list">
+		<li>
+			<h2>第一级菜单</h2>
+			<ul class="hide">
+				<li>
+					<h2>第二级菜单</h2>
+					<ul class="hide">
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul class="hide">
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+							<ul>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<h2>第一级菜单</h2>
+			<ul class="hide">
+				<li>
+					<h2>第二级菜单</h2>
+					<ul class="hide">
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+							<ul>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul class="hide">
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+							<ul>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<h2>第一级菜单</h2>
+			<ul class="hide">
+				<li>
+					<h2>第二级菜单</h2>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul class="hide">
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+							<ul>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul class="hide">
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+							<ul>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="JQ/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+(function() {
+	var $h2 = $("h2");
+	$h2.click(function() {
+		var old = $(this).next();
+
+		if (old.attr("class") == "show") {
+			old.attr("class","hide");
+		} else {
+			old.parent().parent().find("ul").attr("class","hide");
+			old.attr("class","show");
+		}
+
+	});
+})();
+</script>
+</html>
