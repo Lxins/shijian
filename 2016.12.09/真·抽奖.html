@@ -127,7 +127,11 @@
 		this.box = $(box);
 		this.div = this.box.find("div");
 
-		this.num = -1;  // 默认为0的话 有bug (没解决)
+		this.num = 0;
+		this.time = null;
+		this.time2 = null;
+		this.timeout = null;
+		this.timeout2 = null;
 	};
 
 	Tab.prototype.init = function() {
@@ -141,35 +145,46 @@
 	Tab.prototype.click = function() {
 		var _this = this;
 
-		var time = 30;
-		clearInterval(_this.timer);
-		this.timer = setInterval(timer,time)
-		function timer() {
-			_this.Time(time);
-		}
+		var timeout = 2000 + parseInt(Math.random()*2500);
+		var timeout2 = 1000 + parseInt(Math.random()*2500);
+
+		clearTimeout(this.timeout)
+		this.timeout = setTimeout(fnTimer,timeout);
+
+		function fnTimer() {
+			clearInterval(_this.time);
+
+			this.time2 = setInterval(fnTImer,500)
+
+			function fnTImer() {
+				_this.timer();
+				_this.timeout2 = setTimeout(function() {
+					clearTimeout(this.time2);
+					alert("资金正在筹备中");
+				},timeout2);
+			};
+		};
+
+		clearInterval(this.time);
+		this.time = setInterval(fnTime,50);
+
+		function fnTime() {
+			_this.timer();
+		};
 	};
 
-	Tab.prototype.Time = function(time) {
-		var _this = this;
+	Tab.prototype.timer = function() {
 
 		this.div.each(function(i,e) {
 			$(e).attr("class","");
 		});
 
+		this.div.eq(this.num).attr("class","active");
+
 		this.num++;
 
-		_this.div.eq(this.num).attr("class","active");
-
 		if (this.num > this.div.length - 1) {
-			_this.num = -1;
-		}
-
-		if (_this.num == _this.div.length - 1) {
-			clearInterval(_this.timer);
-			clearInterval(_this.time);
-
-			_this.num = -1;
-			return this.Time;
+			this.num = 0;
 		}
 	};
 

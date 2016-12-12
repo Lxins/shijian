@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				font-family: "微软雅黑";
+				color: #333;
+			}
+			#form{
+				text-align: center;
+				
+			}
+			#txt{width: 486px;margin:5px auto;text-align: left;}
+			#txt span{																
+				display: inline-block;
+				font-family: "微软雅黑";
+				font-size: 14px;
+				color: #333;
+			}
+			#txt span:nth-of-type(1){
+				width:156px;
+				height:20px;
+			}
+			#txt span:nth-of-type(2){
+				width:120px;
+				height:20px;
+			}
+		    #box{
+		    	margin: 120px auto;
+		    	width: 600px;
+		    }
+			.c1{
+				background: skyblue;
+			}
+			.c2{
+				background: #fff;
+			}
+			.c3{
+				background: #00BFFF;
+			}
+			.c4{
+				background: #00BFFF;
+				color: #fff;
+			}
+			.c5{
+				background:pink;
+				color: #fff;
+			}
+			table {
+				border: 1px solid #000;
+				border-right:0;
+				border-bottom: none;
+			}
+			table thead th,table tbody td{
+				text-align: center;
+				line-height:25px;
+				border-right:1px solid #000;
+			}
+			table thead th,table tbody td{
+				border-bottom: 1px solid #000;
+			}
+			.sortmode{
+				width: 100px;
+				height: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<div id="txt">
+				    <span>请输入姓名</span>
+				    <span>请选择性别</span>
+				    <span>请输入年龄</span>
+				</div>
+				<div id="form">
+				<form id="form1">
+				    <input type="text" name="username" placeholder="姓名" />
+				    <select name="sex">
+				        <!--<option value="">请选择一个性别</option>-->
+				        <option value="男">男</option>
+				        <option value="女">女</option>
+				    </select>
+				    <input type="text" name="age" placeholder="年龄"/>
+				    <input type="button" name="btn" value="提交">
+				</form>
+				<p>
+				    <form id="form2">
+				    	<span>请选择编号：</span>
+				        <select name="orderName" class="sortmode">
+				            <option value="id" >编号</option>
+				            <option value="age">年龄</option>
+				        </select>
+				        <span>请选择排序方式：</span>
+				        <select name="orderBy" class="sortmode">
+				            <option value="asc">升序</option>
+				            <option value="desc">降序</option>
+				        </select>
+				        <input type="button" name="orderButton" value="排序">
+				      <input type="button" value="批量删除">  
+				    </form>
+				</p>
+				</div>
+			</div>
+			<table width="100%" id="tab1" border="0" cellspacing="0" >
+			    <thead>
+				    <tr>
+				        <th>全选 <input type="checkbox" id="checkAll"></th>
+				        <th>编号</th>
+				        <th>姓名</th>
+				        <th>性别</th>
+				        <th>年龄</th>
+				        <th>操作</th>
+				    </tr>
+			    </thead>
+			    <tbody id="tbody">
+			    	<!-- <tr>
+			    		<td><input type="checkbox" id="checkAll"></td>
+			    		<td>1</td>
+			    		<td>大红</td>
+			    		<td>女</td>
+			    		<td>23</td>
+			    		<td>
+			    			<input type="button" value="上移"/>
+			    			<input type="button" value="下移" />
+			    			<input type="button" value="删除"/>
+			    		</td>
+			    	</tr> -->
+			    </tbody>
+			</table>
+		</div>
+	</body>
+<script type="text/javascript" src="JQ/jquery-3.1.1.js"></script>
+<script>
+(function() {
+	var data = [
+        {
+            'id' : 1,
+            'username' : 'LEO',
+            'age' : 36,
+            'sex' : '男'
+        },
+        {
+            'id' : 2,
+            'username' : 'MOMO',
+            'age' : 16,
+            'sex' : '男'
+        },
+        {
+            'id' : 3,
+            'username' : 'DUODUO',
+            'age' : 29,
+            'sex' : '男'
+        },
+        {
+            'id' : 4,
+            'username' : '勇升',
+            'age' : 46,
+            'sex' : '男'
+        },
+        {
+            'id' : 5,
+            'username' : '小美',
+            'age' : 40,
+            'sex' : '女'
+        }
+    ];
+
+   	/*  1.获取元素
+   		2.创建标签引入data数据
+   		3.点击提交,把输入的value生成到列表中
+   		4.实现表格的全选、上移、下移、删除操作
+   		5.实现排序、批量删除功能
+   	 */
+
+
+   	 //  1.获取元素
+   	 function Tab(id1,id2) {
+   	 	this.$form1 = $(id1);
+   	 	this.$name = this.$form1.find("input:text").eq(0);
+   	 	this.$sex = this.$form1.find("select");
+   	 	this.$age = this.$form1.find("input:text").eq(1);
+   	 	this.$btn = this.$form1.find("input:button");
+
+   	 	this.$tab = $(id2);
+   	 	this.$checkAll = this.$tab.find("#checkAll");
+   	 	this.$tbody = this.$tab.find("tbody");
+
+   	 	this.arr = [];
+
+   	 	this.init();
+   	 };
+
+
+   	 Tab.prototype.init = function() {
+   	 	var _this = this;
+
+   	 	this.puch();
+
+   	 	this.click();
+
+   	 	this.$btn.click(function() {
+   	 		_this.put();
+   	 		_this.$btn.off("click");
+   	 		_this.click();
+   	 	});
+   	 };
+
+
+   	 // 2.创建标签引入data数据
+
+   	 Tab.prototype.puch = function() {
+   	 	var _this = this;
+   	 	this.td = ("<input type=button value=上移><input type=button value=下移><input type=button value=删除>");
+   	 	$(data).each(function(i,e) {
+   	 		$tr = $("<tr></tr>");
+
+   	 		$tr.html("<td><input type=checkbox id=checkAll></td> <td>"+data[i].id+"</td> <td>"+data[i].username+"</td> <td>"+data[i].sex+"</td> <td>"+data[i].age+"</td> <td>"+_this.td+"</td>")
+
+   	 		$(_this.$tbody).append($tr);
+   	 	});
+   	 };
+
+
+   	 // 3.点击提交,把输入的value生成到列表中
+
+   	 Tab.prototype.put = function() {
+   	 	var _this = this;
+   	 	var name = this.$name.val(),
+   	 	    sex = this.$sex.val(),
+   	 	    age = this.$age.val();
+
+ 	    $tr = $("<tr></tr>");
+ 	    $(_this.$tbody).append($tr);
+
+   	 	$("tr").each(function(i,e) {
+   	 		var index = $(e).index()+1;
+   	 		$tr.html("<td><input type=checkbox id=checkAll></td> <td>"+index+"</td> <td>"+name+"</td> <td>"+sex+"</td> <td>"+age+"</td> <td>"+_this.td+"</td>");
+
+   	 	});
+   	 };
+
+
+   	 // 4.实现表格的全选、上移、下移、删除操作
+
+   	 Tab.prototype.click = function() {
+   	 	var _this = this;
+
+   	 	var chec = $("thead tr input:checkbox");
+
+   	 	chec.click(function() {
+ 			_this.chec($(this));
+ 		});
+
+   	 	this.$tr = $("tbody tr");
+   	 	this.$tr.each(function(i,e) {
+
+   	 		var prev = $(e).find("input:button").eq(0);
+   	 		var next = $(e).find("input:button").eq(1);
+   	 		var mover = $(e).find("input:button").eq(2);
+
+   	 		prev.click(function() {
+   	 			_this.prev($(this));
+   	 			console.log(1)
+   	 		})
+   	 		next.click(function() {
+   	 			_this.next($(this));
+   	 			console.log(1)
+   	 		})
+
+   	 		mover.click(function() {
+   	 			_this.mover($(this));
+   	 			console.log(1)
+   	 		});
+	 	})
+   	 };
+
+
+   	 // 全选
+
+   	 Tab.prototype.chec = function() {
+   	 	var chec = this.$tr.find("input:checkbox")
+
+   	 	if (chec.attr("checked")) {
+   	 		chec.removeAttr("checked");
+   	 	} else {
+   	 		chec.attr("checked","true");
+   	 	}
+   	 };
+
+
+   	 // 上移
+
+   	 Tab.prototype.prev = function(This) {
+   	 	var thiss = This.parent().parent();
+   	 	// if (thiss.prev().length) {
+   	 		thiss.insertBefore(thiss.prev());
+   	 	// } else {
+   	 	// 	console.log(1)
+   	 	// 	this.$tbody.append(thiss);
+   	 	// }
+   	 }
+
+
+   	 // 下移
+
+   	 Tab.prototype.next = function(This) {
+   	 	var thiss = This.parent().parent();
+   	 	// if (thiss.next().length) {
+   	 		thiss.insertAfter(thiss.next());
+   	 	// } else {
+   	 	// 	this.$tbody.prepend(thiss);
+   	 	// }
+   	 }
+
+
+   	 // 删除
+
+   	 Tab.prototype.mover = function(This) {
+   	 	var thiss = This.parent().parent();
+   	 	thiss.remove();
+
+   	 	var $tr = this.$tbody.find("tr");
+   	 	$tr.each(function(i,e) {
+   	 		$(e).find("td").eq(1).text(i+1);
+
+   	 	})
+
+   	 }
+
+
+   	 var t = new Tab("#form1","#tab1");
+
+
+
+})()
+</script>
+</html>
