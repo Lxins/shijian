@@ -13,7 +13,37 @@
 	#wrap {
 		width: 100%;
 		height: 100%;
-		background: #de5119;
+		background: #de5119 url(back.png) no-repeat;
+		background-size: cover;
+	}
+	.text {
+		position: fixed;
+		width: 100%;
+		left: 58.3%;
+		top: 60%;
+		font-size: 4.84vw;
+		color: #fcfaf2;
+		font-family: arial;
+		margin-left: -22%;
+	}
+	.text .text2 {
+		letter-spacing: 30px;
+	}
+	.text2 span:nth-of-type(2) {
+		display: block;
+		margin-left: 4.2%;
+	}
+	.sanjiao {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+	.sanjiao span {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
 	}
 	.sanjiao {
 		position: relative;
@@ -305,7 +335,7 @@
 	}
 	.s70 {
 		-webkit-clip-path: polygon(58.75% 58.127%, 61.562% 54.732%, 61.093% 49.60%);
-		background: #b6682e;
+		background: #b5763f;
 	}
 	.s71 {
 		-webkit-clip-path: polygon(58.75% 58.127%, 55.729% 51.237%, 61.093% 49.60%);
@@ -374,6 +404,66 @@
 	.s87 {
 		-webkit-clip-path: polygon(47.239% 67.592%, 51.302% 71.296%, 50.677% 60.493%);
 		background: #ae3d16;
+	}
+	.s88 {
+		-webkit-clip-path: polygon(48.125% 81.481%, 47.239% 67.592%, 51.302% 71.296%);
+		background: #b34017;
+	}
+	.s89 {
+		-webkit-clip-path: polygon(51.302% 71.296%, 50.677% 60.493%, 53.072% 64.917%);
+		background: #ae3f16;
+	}
+	.s90 {
+		-webkit-clip-path: polygon(49.114% 57.613%, 52.812% 59.465%, 53.072% 64.917%);
+		background: #a23f1d;
+	}
+	.s91 {
+		-webkit-clip-path: polygon(49.114% 57.613%, 52.812% 59.465%, 55.729% 55.761%);
+		background: #ae602b;
+	}
+	.s92 {
+		-webkit-clip-path: polygon(52.812% 59.465%, 55.729% 55.761%, 55.364% 59.876%);
+		background: #a84820;
+	}
+	.s93 {
+		-webkit-clip-path: polygon(52.812% 59.465%, 55.364% 59.876%, 53.072% 64.917%);
+		background: #b05126;
+	}
+	.s94 {
+		-webkit-clip-path: polygon(55.364% 59.876%, 53.072% 64.917%, 57.760% 61.831%);
+		background: #c1652c;
+	}
+	.s95 {
+		-webkit-clip-path: polygon(53.072% 64.917%, 53.958% 68.724%, 54.791% 63.888%);
+		background: #c35a23;
+	}
+	.s96 {
+		-webkit-clip-path: polygon(55.729% 55.761%, 55.364% 59.876%, 58.593% 59.053%);
+		background: #9e381b;
+	}
+	.s97 {
+		-webkit-clip-path: polygon(55.729% 55.761%, 58.693% 58.150%, 58.593% 59.053%);
+		background: #642711;
+	}
+	.s98 {
+		-webkit-clip-path: polygon(58.693% 58.150%, 58.593% 59.053%, 62.187% 57.407%);
+		background: #8d351c;
+	}
+	.s99 {
+		-webkit-clip-path: polygon(55.364% 59.876%, 58.593% 59.053%, 60.885% 64.506%);
+		background: #d5976f;
+	}
+	.s100 {
+		-webkit-clip-path: polygon(58.593% 59.053%, 60.885% 64.506%, 62.812% 57.304%);
+		background: #edb497;
+	}
+	.s101 {
+		-webkit-clip-path: polygon(58.693% 58.150%, 63.333% 52.674%, 62.812% 57.304%);
+		background: #c2975f;
+	}
+	.s102 {
+		-webkit-clip-path: polygon(63.333% 52.674%, 62.812% 57.304%, 64.427% 49.382%);
+		background: #99522c;
 	}
 </style>
 </head>
@@ -471,7 +561,33 @@
 		<span class="s88"></span>
 		<span class="s89"></span>
 		<span class="s90"></span>
+		<span class="s91"></span>
+		<span class="s92"></span>
+		<span class="s93"></span>
+		<span class="s94"></span>
+		<span class="s95"></span>
+		<span class="s96"></span>
+		<span class="s97"></span>
+		<span class="s98"></span>
+		<span class="s99"></span>
+		<span class="s100"></span>
+		<span class="s101"></span>
+		<span class="s102"></span>
+	</div>
+	<div class="text">
+		<span class="text1">5</span>
+		<span class="text2">
+			<span>YEARS</span>
+			<span>PROJECTS</span>
+		</span>
 	</div>
 	</section>
 </body>
+<script type="text/javascript">
+	var sanjiao = document.querySelector(".sanjiao");
+	var spans = sanjiao.querySelectorAll("span");
+	for (var i = 0; i < spans.length; i++) {
+		spans[i].style.height = spans[i].style.width;
+	}
+</script>
 </html>
