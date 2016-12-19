@@ -65,6 +65,8 @@
   </ol>
 </blockquote>
 
+
+
 <h4 id="get方式请求">get方式请求:</h4>
 
 <blockquote>
@@ -78,6 +80,8 @@
   
   <p>有缓存和编码问题</p>
 </blockquote>
+
+
 
 <h4 id="post方式请求">post方式请求:</h4>
 
@@ -94,6 +98,8 @@
 </blockquote>
 
 <pre class="prettyprint hljs-dark"><code class="hljs ocaml">ajax.setRequestHeader(<span class="hljs-symbol">'Content</span>-<span class="hljs-type">Type'</span>,<span class="hljs-symbol">'application</span>/x-www-form-urlencoded');<br></code></pre>
+
+
 
 <h4 id="json">JSON:</h4>
 
@@ -128,6 +134,8 @@
 
 <pre class="prettyprint hljs-dark"><code class="hljs monkey"><span class="hljs-keyword">try</span> {<br>    // 代码尝试执行这个块中的内容，如果有错误，则会执行<span class="hljs-keyword">catch</span>{}，并且传入错误信息参数<br>    // <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"错误"</span>)直接执行<span class="hljs-keyword">catch</span>（e）{}<br>} <span class="hljs-keyword">catch</span>（e） {<br><br>}<br></code></pre>
 
+
+
 <h5 id="xhtmlhtml">xhtml\html</h5>
 
 <blockquote>
@@ -154,6 +162,8 @@
   innerHTML</p>
 </blockquote>
 
+
+
 <h5 id="ajaxonload">ajax.onload</h5>
 
 <blockquote>
@@ -176,6 +186,8 @@
   <p>如果将ajax.onreadystatechange放到send的上面，那么在IE下可以多监控一步，能监控4步</p>
 </blockquote>
 
+
+
 <h5 id="http状态码">http状态码</h5>
 
 <blockquote>
@@ -189,6 +201,8 @@
 
 <pre class="prettyprint hljs-dark"><code class="hljs cpp"><span class="hljs-keyword">if</span> (ajax.readyState == <span class="hljs-number">4</span>) {<br>    <span class="hljs-keyword">if</span> （ajax.status &gt;= <span class="hljs-number">200</span> &amp;&amp; ajax.status &lt;= <span class="hljs-number">206</span>）{<br>        alert(ajax.responseText)<br>    }<br>} <span class="hljs-keyword">else</span> {<br>    alert(<span class="hljs-string">"出错,Err:"</span> + ajax.status)<br>}<br></code></pre>
 
+
+
 <h5 id="open的第三个参数">open的第三个参数</h5>
 
 <blockquote>
@@ -197,4 +211,35 @@
   <p>同步：从上往下依次执行，只有前面那个走完，后面才能走</p>
   
   <p>异步：不用从上往下依次执行，不用等前面的执行完，才能执行</p>
+</blockquote>
+
+<h5 id="上传下载">上传下载</h5>
+
+<blockquote>
+  <p>ajax的缺点： 没有返回键</p>
+  
+  <p>在上传的时候，通过上传元素下有个属性files，这个属性就是要上传的数据</p>
+  
+  <p>var val = files.files[0];</p>
+  
+  <p>new FormData();</p>
+  
+  <p>readAsBinaryString  转成二进制</p>
+</blockquote>
+
+<p><strong>ajax.upload.onprogress</strong></p>
+
+<blockquote>
+  <p>监控上传的速度</p>
+  
+  <p>e.loaded   每次上传的大小 <br>
+  e.total    总大小</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs stata">ajax.upload.onprogress = function(<span class="hljs-keyword">e</span>){<br>    (<span class="hljs-keyword">e</span>.loaded / <span class="hljs-keyword">e</span>.<span class="hljs-keyword">total</span>) * nuber + <span class="hljs-string">"px"</span><br>}<br></code></pre>
+
+<p><strong>ajax.onprogress</strong></p>
+
+<blockquote>
+  <p>可以检测下载进度，但是因为前端不能操作本地文件，所以没什么卵用</p>
 </blockquote></div></body></html>
