@@ -296,7 +296,7 @@
   <p><strong>jsonp就是 “json + padding”</strong>  <br>
   内填充的json格式数据就是jsonp</p>
   
-  <p>ajax格式的数据jsonp一定用不了</p>
+  <p><strong>ajax格式的数据jsonp一定用不了</strong></p>
 </blockquote>
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript">$.ajax({<br>    dataType: <span class="hljs-string">"jsonp"</span>,<br>    url: <span class="hljs-string">"1.php?callback=fn&amp;num=number"</span><br>    success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">json</span>) </span>{<br><br>    }<br>})<br></code></pre></div></body></html>
