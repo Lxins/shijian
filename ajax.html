@@ -299,4 +299,14 @@
   <p><strong>ajax格式的数据jsonp一定用不了</strong></p>
 </blockquote>
 
-<pre class="prettyprint hljs-dark"><code class="hljs javascript">$.ajax({<br>    dataType: <span class="hljs-string">"jsonp"</span>,<br>    url: <span class="hljs-string">"1.php?callback=fn&amp;num=number"</span><br>    success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">json</span>) </span>{<br><br>    }<br>})<br></code></pre></div></body></html>
+<pre class="prettyprint hljs-dark"><code class="hljs javascript">$.ajax({<br>    dataType: <span class="hljs-string">"jsonp"</span>,<br>    url: <span class="hljs-string">"1.php?callback=fn&amp;num=number"</span><br>    success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">json</span>) </span>{<br><br>    }<br>})<br></code></pre>
+
+<p><strong>为什么fn必须放在全局？</strong></p>
+
+<blockquote>
+  <p>因为通过jsonp请求数据的时候，回调函数是在全局通用，如果fn没在全局，调用的时候就找不到这个函数了（要报错）</p>
+  
+  <p>当发送一次请求，只要服务器返回一个回调函数式的数据，正好也有函数去接受，什么时候删除都可以，问题是不能保证发送完这次请求，一定为回调函数式的数据，有可能在服务器处理数据的时候，出错了，导致返回的数据不是回调函数式的数据，那么就不会调用。</p>
+  
+  <p>callback 解决了函数名冲突的问题，不会出现请求多个数据执行一个函数的问题</p>
+</blockquote></div></body></html>
