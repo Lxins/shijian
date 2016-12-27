@@ -50,10 +50,64 @@
   <p>一般用来记录用户信息…</p>
   
   <p>设置cookie是key=value来配置的，一般一个cookie做一件事情</p>
+  
+  <p><strong>生命周期：</strong> <br>
+  默认当浏览器被关闭就结束生命周期 <br>
+  ;expires=    设置生命周期</p>
+  
+  <p><strong>设置cookie：</strong> <br>
+  setCookie(key,val,设置时间) 设置的时间，以当前天为基础增加。</p>
+  
+  <p><strong>获取cookie：</strong> <br>
+  当获取cookie的时候，会将这个域名下的所有cookie都获取出来 <br>
+  key=value;空格key=value,空格…</p>
+  
+  <p><strong>删除cookie：</strong> <br>
+  setCookie(key,value,-1);</p>
 </blockquote>
 
 <h3 id="mvc">mvc</h3>
 
 <p>m -&gt; model (数据) <br>
 v -&gt; view (视图) <br>
-c -&gt; controller(控制器)</p></div></body></html>
+c -&gt; controller(控制器)</p>
+
+<h3 id="本地储存">本地储存</h3>
+
+<p><strong>window.localStorage</strong></p>
+
+<ol><li rel="1">一般情况下可以在本地协议下存储。 (IE不支持)  最好用在服务器环境下 </li>
+<li rel="2"><p>每个域名一般是(5M)，后面可能还会扩大容量</p></li>
+<li rel="3"><p><strong>生命周期:  只要不删除就一直在</strong> <br>
+<strong>当关闭当前页面的时候就挂了（只对当前页面有效）</strong></p></li>
+</ol>
+
+<blockquote>
+  <p><strong>设置 setItem(key,value)</strong> <br>
+  localStorage.setItem(“name”,”leo”);</p>
+  
+  <p><strong>获取 getItem(key)</strong>  <br>
+  如果能够查到就返回key对应的value值，否则null <br>
+  localStorage.getItem(“name”);</p>
+  
+  <p><strong>删除指定的 localStorage.removeItem(key)</strong> <br>
+  <strong>删除所有的  localStorage.clear()</strong></p>
+</blockquote>
+
+<p>window.addEventListener(“storage”,functtion(){})</p>
+
+<p><strong>storage</strong></p>
+
+<blockquote>
+  <p>当localStorage中的内容被修改的时候就触发</p>
+  
+  <p>只要storage被修改，storage这个事件就会触发(在本浏览器的所有兄弟页面都会触发)</p>
+  
+  <p>这个事件必须在服务器环境下才能运行</p>
+  
+  <p>如果手动浏览器删除就会在当前页面下触发</p>
+  
+  <p>e 能够记录下之前存储的信息和当前修改的信息，还有所有的数据信息</p>
+  
+  <p>不能用Storage事件监听</p>
+</blockquote></div></body></html>
