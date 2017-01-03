@@ -265,7 +265,7 @@
 
 
 	#wrap {
-		background: #157c80;
+		// background: #157c80;
 	}
 	.s1 {
 		-webkit-clip-path: polygon(49.114% 57.613% , 48.854% 52.16% , 51.354% 59.773%);
@@ -632,7 +632,27 @@
 		background: #11535a;
 	}
 	.s93 {
-		-webkit-clip-path: polygon(71.822% 35.699% , 72.656% 45.164% , 73.229% 45.164%);
+		-webkit-clip-path: polygon(71.822% 35.699% , 72.656% 45.164% , 73.129% 45.164%);
+		background: #11535a;
+	}
+	.s94 {
+		-webkit-clip-path: polygon(71.875% 35.699% , 71.041% 41.872% , 72.656% 41.872%);
+		background: #11535a;
+	}
+	.s95 {
+		-webkit-clip-path: polygon(71.875% 37.551% , 71.458% 41.285% , 72.291% 41.285%);
+		background: #1a7d81;
+	}
+	.s96 {
+		-webkit-clip-path: polygon(70.941% 41.358% , 70.941% 41.872% , 72.756% 41.358%);
+		background: #11535a;
+	}
+	.s97 {
+		-webkit-clip-path: polygon(70.781% 42.489% , 70.781% 43.106% , 72.916% 42.489%);
+		background: #11535a;
+	}
+	.s98 {
+		-webkit-clip-path: polygon(72.916% 42.489% , 72.916% 43.106% , 70.781% 43.106%);
 		background: #11535a;
 	}
 

@@ -5,9 +5,7 @@
 	 	time3 = null,
 	 	time4 = null,
 	 	time5 = null,
-	 	time6 = null,
-	 	time7 = null,
-	 	time8 = null;
+	 	time6 = null;
 	var tabOff = false;
 
 	initSt(); //生成strong
@@ -135,8 +133,8 @@
 					opacity: "1"
 				});
 			}
-			clearTimeout(time5);
-			time5 = setTimeout(function() {
+			clearTimeout(time3);
+			time3 = setTimeout(function() {
 				tabOff = true;
 			},500);
 
@@ -175,13 +173,13 @@
 					},2600);
 				});
 
-				$("wrap").css("opacity","1"});
+				$("#wrap").css("opacity","1");
 
 				$text.css("opacity","0");
 				down = function() {};
 
-				clearTimeout(time6);
-				time6 = setTimeout(function() {
+				clearTimeout(time4);
+				time4 = setTimeout(function() {
 					$(".lion").remove();
 					initSp($(".box"),95,2); //生成span
 					$("#wrap").css({
@@ -199,8 +197,8 @@
 							left: "0"
 						})
 					});
-					clearTimeout(time7);
-					time7 = setTimeout(function() {
+					clearTimeout(time5);
+					time5 = setTimeout(function() {
 						$(".box").find("span").each(function(i,e) {
 							$(e).css({
 								opacity: "1",
@@ -209,8 +207,8 @@
 							})
 						});
 					},200)
-					clearTimeout(time8);
-					time8 = setTimeout(function() {
+					clearTimeout(time6);
+					time6 = setTimeout(function() {
 						$(".durance").find("p span").eq(0).css("opacity","1");
 					},1000)
 				},2500)
