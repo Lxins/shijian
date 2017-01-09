@@ -1,0 +1,286 @@
+<!DOCTYPE html><html><head><title>JS基础</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="js基础">JS基础</h3>
+
+<p><strong>JS组成:</strong></p>
+
+<blockquote>
+  <p>ECMAScrpit: javascript组成语言的语法和基本对象</p>
+  
+  <p>DOM: 文档对象模型，描述处理网页内容的方法和接口</p>
+  
+  <p>BOM: 浏览器对象模型，描述与浏览器进行交互的方法和接口</p>
+</blockquote>
+
+<p><strong>JS的元素获取:</strong></p>
+
+<blockquote>
+  <p>document.getElementById(“id名字”); //通过id获取</p>
+  
+  <p>parent。getElementsByTagName(“标签名字”); //在父级通过标签名获取</p>
+  
+  <p>document.querySelector(‘css selector’); 找到一组中的第0个</p>
+  
+  <p>document.querySelectorAll(‘css selector’);找到整个一组</p>
+  
+  <p>documen.body</p>
+  
+  <p>documen.head</p>
+</blockquote>
+
+<p><strong>单等</strong> 是赋值 把等式右边的值赋给等号左边</p>
+
+<p><strong>双等</strong> 是比较操作 会比较等式两边的值是否相等，  如果是一个字符串 数字  和 一个真正的数组做比较，会把字符串数字转换成真正的数字，然后再做比较;</p>
+
+<p><strong>三等</strong>  三个等号，不但会比较值是否相等，还会比较类型是不是同一个。如果值相等，类型不同，也会返回 false;</p>
+
+<p><strong>事件</strong> <br>
+window.onload 页面加载完成</p>
+
+<p>onclick 鼠标点击</p>
+
+<p>onmouseover 鼠标移入     onmouseenter  鼠标移入</p>
+
+<p>onmouseout 鼠标移出       onmouseleave  鼠标移出</p>
+
+<p>onmousedown 鼠标按下      onmouseup 鼠标抬起</p>
+
+<p>onchange</p>
+
+<p><strong>变量</strong></p>
+
+<blockquote>
+  <p>变量声明 var a; <br>
+  变量赋值 a = 10; <br>
+  变量调用 a;</p>
+  
+  <p>var i = 0; <br>
+  i++ 如果在等号的左边，就已经运算了  所有i++ = 1 <br>
+  consol.log(i++ != i++) consol.log(++i == i++)</p>
+</blockquote>
+
+<p><strong>函数</strong></p>
+
+<blockquote>
+  <p>函数声明    function name() {};</p>
+  
+  <p>函数表达式  var name = function() {};</p>
+  
+  <p>函数的非事件调用 name();</p>
+  
+  <p>函数的事件调用  el.onclick = name;</p>
+  
+  <p>函数传参  function name(形参){} name3实参);</p>
+</blockquote>
+
+<p><strong>自定义属性</strong></p>
+
+<blockquote>
+  <p><strong>对象本身没有这个属性，然后我们自己给对象添加了这个属性，这个就叫做自定义属性</strong></p>
+</blockquote>
+
+<p><strong>索引值</strong></p>
+
+<blockquote>
+  <p>el[i].index = i; 给这组元素，每一个对象添加一个序号   （需要一组数据控制另一组数据的时候 给控制的一方添加索引）</p>
+</blockquote>
+
+<p><strong>数组</strong></p>
+
+<blockquote>
+  <p>一组数据，每个数据之间用“，”号隔开     下标  length</p>
+</blockquote>
+
+<p><strong>字符串</strong></p>
+
+<blockquote>
+  <p>引号包起来的一串字符    下标   length</p>
+</blockquote>
+
+<p><strong>循环</strong></p>
+
+<blockquote>
+  <p>如果要操作一组元素，记得用循环 <br>
+  如果在操作一组元素，我们想要知道当前操作的元素是这一组第几个，添加索引值</p>
+  
+  <p><strong>判断</strong> <br>
+  做同一个操作，但是会有不同几种处理 记得要加判断(可以利用取模去优化)</p>
+  
+  <p>如果有 上一步 下一步操作，设置一个数字变量,上一步 – ，下一步++;</p>
+</blockquote>
+
+<p><strong>过界处理:</strong></p>
+
+<blockquote>
+  <p>循环</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs autoit"><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &lt; <span class="hljs-number">0</span>) {<br>    <span class="hljs-built_in">now</span> = length - <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>}<br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &gt; length - <span class="hljs-number">1</span>) {<br>    <span class="hljs-built_in">now</span> = <span class="hljs-number">0</span><span class="hljs-comment">;</span><br>}<br></code></pre>
+
+<blockquote>
+  <p>顺序</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs autoit"><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &lt; <span class="hljs-number">0</span>) {<br>    <span class="hljs-built_in">now</span> = <span class="hljs-number">0</span><span class="hljs-comment">;</span><br>}<br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &gt; length - <span class="hljs-number">1</span>) {<br>    <span class="hljs-built_in">now</span> = length - <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>}<br></code></pre>
+
+<blockquote>
+  <p><strong>判断数据类型 typeof</strong></p>
+</blockquote>
+
+<p>简单数据类型</p>
+
+<blockquote>
+  <p>number(数字) , string(字符串) , boolean(布尔值) , function(函数) , undefined(未定义);</p>
+</blockquote>
+
+<p>复杂数据类型</p>
+
+<blockquote>
+  <p>object(对象)</p>
+</blockquote>
+
+<p><strong>取整</strong> <br>
+parseInt();</p>
+
+<p><strong>保留一位小数</strong> <br>
+parseFLoat();</p>
+
+<p><strong>预解析</strong></p>
+
+<blockquote>
+  <p>先是var  后是函数           但是var的赋值还停留在原处</p>
+</blockquote>
+
+<p><strong>定时器</strong></p>
+
+<blockquote>
+  <p>setInterval()：间隔定时器    每间隔多长时间，就执行某件事 <br>
+  setInterval(fn，间隔时间);  fn  我们重复要做的事    间隔时间单位 ms <br>
+  clearInterval 清除定时器</p>
+  
+  <p>setTimeout(): 延迟型定时器   延迟多长时间执行某件事 <br>
+  clearTimeout 清除定时器</p>
+</blockquote>
+
+<p><strong>设置时间</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs lasso"><span class="hljs-built_in">var</span> <span class="hljs-built_in">date</span> = <span class="hljs-literal">new</span> <span class="hljs-built_in">Date</span>();<br>    <span class="hljs-built_in">var</span> year = <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getFullYear();  <span class="hljs-comment">//获取年份</span><br><br>    <span class="hljs-built_in">var</span> month = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getMonth() + <span class="hljs-number">1</span>);   <span class="hljs-comment">//获取月份</span><br><br>    <span class="hljs-built_in">var</span> date2 = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getDate());    <span class="hljs-comment">//获取日期</span><br><br>    <span class="hljs-built_in">var</span> hours = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getHours());   <span class="hljs-comment">//获取时</span><br><br>    <span class="hljs-built_in">var</span> minutes = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getMinutes());   <span class="hljs-comment">//获取分</span><br><br>    <span class="hljs-built_in">var</span> seconds = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getSeconds());   <span class="hljs-comment">//获取秒</span><br><br>    <span class="hljs-built_in">var</span> day = <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getDay();    <span class="hljs-comment">//获取星期</span><br></code></pre>
+
+<p><strong>math</strong></p>
+
+<blockquote>
+  <p><strong>小数位不要超过15位</strong></p>
+  
+  <p>取绝对值 Math.abs(nub)； return nub的绝对值</p>
+  
+  <p>向上取整 Math.ceil(nub)；return nub向上取整的结果</p>
+  
+  <p>向下取整 Math.floor(nub)；return nub向下取整的结果</p>
+  
+  <p>四舍五入 Math.round(nub)；return nub小数位四舍五入的结果</p>
+  
+  <p>取最大值 Math.max(nub,nub)；return 2个nub中最大的值</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs stylus"><span class="hljs-tag">var</span> m = Math<span class="hljs-class">.max</span><span class="hljs-class">.apply</span>(null,arr)  求数组中最大值 <span class="hljs-function"><span class="hljs-title">null</span><span class="hljs-params">(只要是对象就行)</span></span><br></code></pre>
+
+<blockquote>
+  <p>取最小值 Math.min(nub,nub)；return 2个nub中最小的值</p>
+  
+  <p>随机数 Math.random() 返回值 0 - 1 之间的数字，不包括1</p>
+  
+  <p>求平方根 Math.sqrt(nub) 返回nub的平方根</p>
+  
+  <p>求次幂Math.pow(x,y)   返回 x 的 y 次幂(方)</p>
+  
+  <p>圆周率 Math.PI</p>
+</blockquote>
+
+<p><strong>字符串</strong></p>
+
+<blockquote>
+  <p><strong>模板字符串 对于要替换成变量的字符串用一对大括号包起来 然后前面写一个$符号</strong> <br>
+  <strong>注意</strong>这些字符串放在一对反引号里 ``</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">`当前的时间是<span class="hljs-subst">${h}</span>小时<span class="hljs-subst">${m}</span>分钟<span class="hljs-subst">${s}</span>秒`</span>;<br></code></pre>
+
+<blockquote>
+  <p><strong>str.indexof(meedle,index)</strong> 用于查找字符串，第一个参数是要查找的字符串，第二个参数可选，用于指定从哪里开始查找，如果找到了返回找到字符的位置，如果没找到就返回-1</p>
+  
+  <p><strong>str.lastIndexOf()</strong>从后往前查找</p>
+  
+  <p><strong>includes()</strong> 用于查找指定字符串，找到了返回true否则false</p>
+  
+  <p><strong>str.match()</strong> 找到字符串中的对应内容</p>
+  
+  <p><strong>str.startsWith()</strong> 用来判断要查找的字符串是否在开头位置</p>
+  
+  <p><strong>str.endsWith()</strong> 用来判断要查找的字符串是否在结尾位置 如果在开头或者结尾位置就返回true 否则就是false</p>
+  
+  <p><strong>str.slice(start,end)</strong> 用来截取字符串的，接受两个参数，起始位和结束位，返回的结果包含起始位不包含结束位 <br>
+  <strong>如果 start &gt; end 返回 “”(空字符串)，如果start &lt; 0，或者 end &lt; 0 那么就等于从start + length 到 end加上length</strong></p>
+  
+  <p><strong>str.substr(start,nums)</strong> 用于截取字符串，第一个参数是从哪里截取 第二个参数 是截取到第几位 <br>
+  <strong>如果start &lt; 0 = start + length;</strong></p>
+  
+  <p><strong>str.substring(start,end);</strong> 如果 start end &lt; 0 默认等于0 如果 start &gt; end 会交换位置</p>
+  
+  <p><strong>str.split(separator,[limit])</strong> 用来分割字符串，第一个参数是用什么来分割字符串，第二个参数是取分割后数组中的前几位 (可选)</p>
+  
+  <p><strong>str.toUpperCase() == str.toLocaleUpperCase();</strong> 将字符串所有的字母 转换为大写</p>
+  
+  <p><strong>str.toLowerCase() == str.toLocaleLowerCase();</strong> 将字符串所有的字母 转换为小写</p>
+  
+  <p><strong>str.charAt(position) if position false = &gt; “”;  </strong> 用来查找对应下标的字符串 如果是负数 返回 “”;</p>
+  
+  <p><strong>str.charCodeAt(position)</strong> 用来返回对应字符的Unicode编码</p>
+  
+  <p><strong>str.replace(value,newValue)</strong> 用来查找指定的内容，并替换为新内容</p>
+  
+  <p><strong>str.tirm()</strong> 用来去掉字符串的前后空格</p>
+</blockquote>
+
+<p><strong>数组</strong></p>
+
+<blockquote>
+  <p>数组的length属性 不仅能读还能写，在设置数组length属性的时候 <br>
+  <strong>如果设置的length小于原来数组的长度 那么就会截取数组的前length个</strong> <br>
+  <strong>如果设置的length大于原来的长度 那么原来的数组就会用对应个数的undefined去填充</strong></p>
+  
+  <p>如果只有一个参数 ，当这个参数是数字的时候，创建这个参数长度的数组，数组中的每一项都是undefined， <br>
+  <strong>如果是大于一个参数，那么就是和[]是一样的。</strong> <br>
+  <strong>如果参数是个0 那么就会创建一个 空数组</strong></p>
+  
+  <p><strong>arr.indexOf(el,index)</strong> 用来查找数组中的某一项，如果找到了就返回对应位置，如果没找到就返回-1 从前向后查找 index 为可选参数，从第几位开始查找</p>
+  
+  <p><strong>arr.lastIndexOf(el,index)</strong> 是从后向前查找</p>
+  
+  <p><strong>arr.push(11,12,13 …)</strong> 向数组最后面添加新的元素，返回数组新的长度</p>
+  
+  <p><strong>arr.pop()</strong> 删除数组中最后一位，返回值是被删除的最后一位</p>
+  
+  <p><strong>arr.unshift(11,12,13…)</strong> 向数组最前面添加新的数据，返回数组新的长度</p>
+  
+  <p><strong>arr.shift()</strong>  删除数组中第一位，返回值是被删除的第一位</p>
+  
+  <p><strong>slice(start,end)</strong> 用来截取数组，包括start  不包括end， <br>
+  <strong>如果 start 或者 end &lt; 0  就等于 start + length 或者 end + length</strong> <br>
+  <strong>如果start &gt; end 就返回 [] ，其他情况返回被截取的数据</strong> </p>
+  
+  <p><strong>arr.splice(index,delete_num,[1l,l2,l3 …])</strong> 用来删除或者替换数组中指定位置开始的多少个元素，返回值是被删除的那个数组(内的数据是被删除那个位置的数据)</p>
+  
+  <p><strong>Array.from(类数组)</strong> 把一个类数组转换成数组</p>
+  
+  <p><strong>Array.reverse()</strong> 用来反转数组</p>
+  
+  <p><strong>arr.forEach(function(item,i,arr){ })</strong>  用来便利数组中的每一项 item 代表  数组中的每一项   i 代表每一项对应的下标   arr 代表数组本身</p>
+  
+  <p><strong>arr.map(fn)</strong> 使用方法和forEach(fn)一样，只不过它接受的函数参数可以有返回值</p>
+  
+  <p><strong>arr.fill(context,[start,end]);</strong>    用来填充数组，第一个参数是要填充的内容  后面两个可选参数，从哪里</p>
+</blockquote></div></body></html>
