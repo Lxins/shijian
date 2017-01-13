@@ -8,6 +8,9 @@
 	 	time6 = null;
 	var tabOff = false;
 
+	var num = 0;
+	console.log(data)
+
 	initSt(); //生成strong
 	initSp($(".lion"),97,1); //生成span
 
@@ -48,6 +51,11 @@
 		});
 	}
 
+	window.addEventListener("resize",function() {
+		$("#wrap").width($("#wrap").height() * 1.975);
+		console.log($("#wrap").width())
+	});
+
 	$(window).on("load",function() {
 		$(".lion").find("span").each(function(i,e) {
 			$(e).stop().animate({
@@ -78,7 +86,7 @@
 
 			$text.stop().animate({top: "60%"},2000);
 			$text.find(".text1").stop().animate({opacity: "1"},2000);
-			$text.find(".text2 span").eq(0).stop().animate({opacity: "1"},2000,function() {
+			$text.find(".text2 span").eq(0).stop().animate({opacity: "1"},1000,function() {
 				time3();
 			});
 		};
@@ -110,17 +118,34 @@
 
             	if (delta > 0) {
 			        // 向上滚
-			        up();
+			        num--;
+			        if (num < 0) {
+			        	num = 0;
+			        }
+
+			        tabOff = false;
+
+		        	up();
+
+			        console.log(num)
 			    } else if (delta < 0) {
 			        // 向下滚
-			        down();
+			        num++;
+			        if (num > 2) {
+			        	num = 1;
+			        }
+
+			        tabOff = true;
+
+		        	down();
+			         console.log(num)
 			    }
       	 	})
 		};
 
 		// 下滚事件
 		function down() {
-			if (tabOff == false) {
+			if (tabOff == true && num == 1) {
 				$text.find(".text2 span").eq(0).css({
 					transition: "2s",
 					transform: "translateY(-55px)",
@@ -133,86 +158,85 @@
 					opacity: "1"
 				});
 			}
-			clearTimeout(time3);
-			time3 = setTimeout(function() {
-				tabOff = true;
-			},500);
 
-			vanish();
+
+			if (num == 2) {
+				vanish();
+			}
 		}
 
 		// 上滚事件
 		function up() {
-			$text.find(".text2 span").eq(0).css({
-				transition: "2s",
-				transform: "translateY(0)",
-				opacity: "1"
-			});
+			if (tabOff == false && num == 0) {
+				$text.find(".text2 span").eq(0).css({
+					transition: "2s",
+					transform: "translateY(0)",
+					opacity: "1"
+				});
 
-			$text.find(".text2 span").eq(1).css({
-				transition: "2s",
-				transform: "translateY(0)",
-				opacity: "0"
-			});
+				$text.find(".text2 span").eq(1).css({
+					transition: "2s",
+					transform: "translateY(0)",
+					opacity: "0"
+				});
+			}
 		}
 
 		// 清除狮子
 		function vanish() {
-			if (tabOff == true) {
-				$(".lion").find("span").each(function(i,e) {
-					$(e).stop().animate({
-						top: parseFloat(Math.random() * -1500) + "px",
-						opacity: "0"
-					},2600);
+			$(".lion").find("span").each(function(i,e) {
+				$(e).stop().animate({
+					top: parseFloat(Math.random() * -1500) + "px",
+					opacity: "0"
+				},2600);
+			});
+
+			$(".lion").find("strong").each(function(i,e) {
+				$(e).stop().animate({
+					top: parseFloat(Math.random() * -1500) + "px",
+					opacity: "0"
+				},2600);
+			});
+
+			$("#wrap").css("opacity","1");
+
+			$text.css("opacity","0");
+			down = function() {};
+
+			clearTimeout(time3);
+			time3 = setTimeout(function() {
+				$(".lion").remove();
+				initSp($(".box"),92,5); //生成span
+				$("#wrap").css({
+					background: "#ee5688",
+					opacity: "1"
 				});
-
-				$(".lion").find("strong").each(function(i,e) {
-					$(e).stop().animate({
-						top: parseFloat(Math.random() * -1500) + "px",
-						opacity: "0"
-					},2600);
+				$(".prj-text").find("p").eq(1).css("opacity","1");
+				$(".btn").find("span").eq(1).css("opacity","1");
+				$(".text-bg").css("opacity","1");
+				$(".prj").css("opacity","1");
+				$(".box").find("span").each(function(i,e) {
+					$(e).css({
+						opacity: "0",
+						top: parseFloat(Math.random() * 1500) + "px",
+						left: "0"
+					})
 				});
-
-				$("#wrap").css("opacity","1");
-
-				$text.css("opacity","0");
-				down = function() {};
-
 				clearTimeout(time4);
 				time4 = setTimeout(function() {
-					$(".lion").remove();
-					initSp($(".box"),95,2); //生成span
-					$("#wrap").css({
-						background: "#ee5688",
-						opacity: "1"
-					});
-					$(".prj-text").find("p").eq(1).css("opacity","1");
-					$(".btn").find("span").eq(1).css("opacity","1");
-					$(".text-bg").css("opacity","1");
-					$(".prj").css("opacity","1");
 					$(".box").find("span").each(function(i,e) {
 						$(e).css({
-							opacity: "0",
-							top: parseFloat(Math.random() * 1500) + "px",
+							opacity: "1",
+							top: "0",
 							left: "0"
 						})
 					});
-					clearTimeout(time5);
-					time5 = setTimeout(function() {
-						$(".box").find("span").each(function(i,e) {
-							$(e).css({
-								opacity: "1",
-								top: "0",
-								left: "0"
-							})
-						});
-					},200)
-					clearTimeout(time6);
-					time6 = setTimeout(function() {
-						$(".durance").find("p span").eq(0).css("opacity","1");
-					},1000)
-				},2500)
-			}
+				},200)
+				clearTimeout(time6);
+				time6 = setTimeout(function() {
+					$(".durance").find("p span").eq(0).css("opacity","1");
+				},1000)
+			},2500)
 		}
 
 
