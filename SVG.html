@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><title>SVG</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="svg">SVG</h3>
+
+<blockquote>
+  <p>canvas 是位图 <br>
+  SVG 是矢量图</p>
+</blockquote>
+
+
+
+<h4 id="位图和矢量图">位图和矢量图</h4>
+
+<blockquote>
+  <p><strong>位图：</strong> 是由一个个像素组成的</p>
+  
+  <p><strong>优点：</strong>  <br>
+  可以识别更多颜色 图片看起来更加细腻</p>
+  
+  <p>位图图像与矢量图像相比更容易模仿照片似的真实效果搜索。位图图像的主要优点在于表现力强、细腻、层次多、细节多，可以十分容易的模拟出像照片一样的真实效果。由于是对图像中的像素进行编辑，所以在对图像进行拉伸、放大或缩小等到处理时，其清晰度和光滑度会受到影响。位图图像可以通过数字相机、扫描或PhotoCD获得，也可以通过其他设计软件生成 （<strong>大牛版</strong>）</p>
+  
+  <p><strong>缺点：</strong></p>
+  
+  <p>放大后 会失真</p>
+  
+  <p>位图在放大到一定限度时会发现它是由一个个小方格组成的，这些小方格被称为像素点，一个像素是图像中最小的图像元素。在处理位图图像时，所编辑的是像素而不是对象或形状，它的大小和质量取决于图像中的像素点的多少，每平方英寸中所含像素越多，图像越清晰，颜色之间的混和也越平滑。计算机存储位图像实际上是存储图像的各个像素的位置和颜色数据等到信息，所以图像越清晰，像素越多，相应的存储容量也越大。（<strong>大牛版</strong>）</p>
+</blockquote>
+
+<hr>
+
+<blockquote>
+  <p><strong>矢量图：</strong> 绘图图像，在数学上定义为一系列点与点之间的关系 </p>
+  
+  <p><strong>优点：</strong></p>
+  
+  <p>矢量图可以任意放大或缩小而不会出现图像失真现象</p>
+  
+  <p><strong>缺点：</strong></p>
+  
+  <p>矢量图不容易制作色彩丰富的图像，绘制的图像不很真实，并且在不同的软件之间交换数据也不太方便 </p>
+</blockquote>
+
+
+
+<h4 id="svg的使用方法">SVG的使用方法</h4>
+
+<pre class="prettyprint hljs-dark"><code class="hljs xml"><span class="hljs-comment">&lt;!--图片引入svg--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"1.svg"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"widht:300px; height:300px;"</span>&gt;</span><br><span class="hljs-comment">&lt;!--背景引入svg--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"width:300px; height:300px; background:url(1.svg) no-repeat"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span><br><span class="hljs-comment">&lt;!--框架引入svg--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-title">iframe</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"1.svg"</span> <span class="hljs-attribute">width</span>=<span class="hljs-value">"300px"</span> <span class="hljs-attribute">height</span>=<span class="hljs-value">"300px"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">iframe</span>&gt;</span><br><span class="hljs-comment">&lt;!--把svg添加到div中--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"div1"</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-title">svg</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://www.w3.org/2000/svg"</span> <span class="hljs-attribute">width</span>=<span class="hljs-value">"100%"</span> <span class="hljs-attribute">height</span>=<span class="hljs-value">"100%"</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-title">circle</span> <span class="hljs-attribute">cx</span>=<span class="hljs-value">"200"</span> <span class="hljs-attribute">cy</span>=<span class="hljs-value">"200"</span> <span class="hljs-attribute">r</span>=<span class="hljs-value">"80"</span> <span class="hljs-attribute">fill</span>=<span class="hljs-value">"skyblue"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">circle</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-title">svg</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--引用外部svg格式--&gt;</span><br><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="hljs-doctype">&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"<br>"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-title">svg</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://www.w3.org/2000/svg"</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-title">circle</span> <span class="hljs-attribute">cx</span>=<span class="hljs-value">"200"</span> <span class="hljs-attribute">cy</span>=<span class="hljs-value">"200"</span> <span class="hljs-attribute">r</span>=<span class="hljs-value">"80"</span> <span class="hljs-attribute">fill</span>=<span class="hljs-value">"skyblue"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">circle</span>&gt;</span><br></code></pre>
+
+<p></p>
+
+
+
+<h4 id="svg标签">SVG标签</h4>
+
+<blockquote>
+  <p><strong>circle</strong>   圆 <br>
+  cx    x轴的坐标  中心点位置 <br>
+  cy   y轴的坐标   中心点位置 <br>
+  r   半径 <br>
+  fill  设置背景颜色  transparent 透明 <br>
+  stroke 边框颜色 <br>
+  stroke-width  边框颜色宽度 <br>
+  stroke-opacity 边框颜色透明度</p>
+  
+  <p>可以用style的格式去写</p>
+  
+  <p><strong>recl</strong>  矩形 <br>
+  width  宽 <br>
+  height 高 <br>
+  x 距离左边的位置 <br>
+  y 距离上边的位置 <br>
+  rx ry （可以写一个） 四个角的弧度</p>
+  
+  <p><strong>line</strong> 线 <br>
+  x1  y1  第一个点位置 <br>
+  x2 y2  第二个点位置</p>
+  
+  <p>g  对g标签内元素进行操作</p>
+  
+  <p>transform=”translate(0,0)” 位移   （貌似不能写百分比）</p>
+  
+  <p><strong>text</strong> 添加文字 <br>
+  x y 文字位置 <br>
+  font-size 文字大小 <br>
+  text-anchor   middle 居中  start 左侧  end 右侧  <br>
+  上下居中的话   改y值 <br>
+  cursor: pointer  鼠标移入变为手型</p>
+  
+  <p><strong>image</strong> 添加图片 <br>
+  x y 图片的坐标 <br>
+  width  图片的宽度 <br>
+   height 图片的高度 <br>
+   xlink:href=”地址” </p>
+</blockquote></div></body></html>
