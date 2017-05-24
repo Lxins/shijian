@@ -1,0 +1,334 @@
+<!DOCTYPE html><html><head><title>ajax\jsonp</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="ajaxjsonp">ajax\jsonp</h3>
+
+<p><strong>什么时候使用它们</strong>能够获取到什么样的数据</p>
+
+
+
+<h5 id="ajax的缺点">ajax的缺点：</h5>
+
+<p>没有浏览器 自带的返回键(因为本页面刷新数据，不跳转)</p>
+
+
+
+<h5 id="jsonp的缺点">jsonp的缺点：</h5>
+
+<p>只有带回调的数据才能访问（ajax的数据，jsonp一定访问不了）</p>
+
+<p>而jsonp的数据，ajax是可以访问的。</p>
+
+<p>jsonp只能用get方式，不能用post</p>
+
+
+
+<h3 id="ajax">ajax</h3>
+
+<blockquote>
+  <p>单词缩写： <br>
+  Asynchronous JavaScript and XML</p>
+  
+  <p><strong>异步的js和xml</strong></p>
+  
+  <p>目前ajax不但能处理xml还能处理json，字符串   “[]” , “{}” , ” ” , xml </p>
+  
+  <p>前后端的数据交互</p>
+  
+  <p><strong>使用ajax必须要在服务器环境下运行！！！</strong> <br>
+  不要f12，file协议是不能运行后端代码的（不会有响应）</p>
+  
+  <p><strong>创建一个ajax对象</strong> </p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs haxe"><span class="hljs-keyword">var</span> ajax =  <span class="hljs-keyword">new</span> <span class="hljs-type">XMLhttpRequest</span>()<br></code></pre>
+
+<blockquote>
+  <p><strong>填写地址</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs fsharp">ajax.<span class="hljs-keyword">open</span>(<span class="hljs-string">"get"</span>,<span class="hljs-string">"php/get.php?user="</span>+<span class="hljs-keyword">val</span>,<span class="hljs-keyword">true</span>)<br></code></pre>
+
+<blockquote>
+  <p><strong>发送请求</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs abnf">ajax.send()<span class="hljs-comment">;</span><br></code></pre>
+
+<blockquote>
+  <p><strong>等待服务器响应</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs actionscript">ajax.onload = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{}<br></code></pre>
+
+<blockquote>
+  <p><strong>接受数据</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs actionscript">ajax.onload = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{<br>        s.innerHTML = ajax.responseText;<span class="hljs-comment">//这个步骤</span><br>    }<br><br>responseText： ajax请求返回的内容就放在这个属性下面<br></code></pre>
+
+<blockquote>
+  <p><strong>优点</strong></p>
+  
+  <p>只刷新数据，不刷新页面（页面无刷新请求）</p>
+  
+  <p>在本页面请求服务器，做到实时验证。减少用户返工率并且优化用户体验。</p>
+  
+  <p>减轻服务器压力</p>
+  
+  <p>ajax：</p>
+  
+  <ol><li rel="1"><p>原理 （必须掌握）</p></li>
+  <li rel="2"><p>如果拼写接口（必须掌握）</p></li>
+  <li rel="3"><p><strong>如何操作数据</strong> （必须掌握 * 3）</p></li>
+  </ol>
+</blockquote>
+
+
+
+<h4 id="get方式请求">get方式请求:</h4>
+
+<blockquote>
+  <p>通过url地址进行传输数据</p>
+  
+  <p>体积是受浏览器的限制的。（每个浏览器限制是不一样的）</p>
+  
+  <p>因为是url进行传输的，所有填写的信息会暴露出来，相对来说不安全</p>
+  
+  <p>在IE下如果用中文传输要记得把数据转成uri编码。</p>
+  
+  <p>有缓存和编码问题</p>
+</blockquote>
+
+
+
+<h4 id="post方式请求">post方式请求:</h4>
+
+<blockquote>
+  <p>没有缓存和编码问题</p>
+  
+  <p>通过服务器来进行传输数据的</p>
+  
+  <p>体积  理论上是无限的 -&gt; 一般后端会给限制</p>
+  
+  <p>相对get来说是比较安全的</p>
+  
+  <p>要<strong>在send之间</strong>加请求头信息：告诉服务器当前传输的数据格式是什么样的。</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs ada">ajax.setRequestHeader(<span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span><span class="hljs-string">','</span>application/x-www-form-urlencoded');<br></code></pre>
+
+
+
+<h4 id="json">JSON:</h4>
+
+<blockquote>
+  <p>如果code为1就是失败 <br>
+  如果code为0就成功 <br>
+  因为ajax.responseText为字符串（json格式的数据） <br>
+  前端要使用json数据，要把json数据转成对象的格式才能直接使用 <br>
+  所以用了JSON.parse</p>
+  
+  <p>JSON.stringify( ); 转成字符串</p>
+</blockquote>
+
+<p><strong>eval:</strong>     不安全</p>
+
+<blockquote>
+  <p>将字符串转成可运行的javascript代码</p>
+</blockquote>
+
+<p><strong>new Function</strong>   耗性能</p>
+
+<blockquote>
+  <p>将字符串转成可运行的javascript代码</p>
+</blockquote>
+
+<p><strong>在IE下，中文会乱码  -&gt;  中文直接转成uri编码</strong></p>
+
+<blockquote>
+  <p>encodeURI :  将中文转成uri编码格式 <br>
+  decodeURI：将uri编码转成中文</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs monkey"><span class="hljs-keyword">try</span> {<br>    // 代码尝试执行这个块中的内容，如果有错误，则会执行<span class="hljs-keyword">catch</span>{}，并且传入错误信息参数<br>    // <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"错误"</span>)直接执行<span class="hljs-keyword">catch</span>（e）{}<br>} <span class="hljs-keyword">catch</span>（e） {<br><br>}<br></code></pre>
+
+
+
+<h5 id="xhtmlhtml">xhtml\html</h5>
+
+<blockquote>
+  <p><strong>在操作xml数据的时候，要用response XML，会将xml的字符串转成dom节点</strong></p>
+  
+  <p><strong>缓存：</strong></p>
+  
+  <p>如果两次都打开同样的地址，第二次就调用第一次缓存中的数据，不会再次通过地址获取</p>
+  
+  <p><strong>解决缓存问题：  get下的问题</strong></p>
+  
+  <p>只要保证每次的url地址不同即可  加?&amp; + new data</p>
+  
+  <p><strong>xml中不支持children</strong> <br>
+  可以用childNodes或tagname</p>
+  
+  <p><strong>IE10以上获取xml的内容</strong> <br>
+  textContent</p>
+  
+  <p><strong>IE10以下</strong> <br>
+  text</p>
+  
+  <p><strong>chrome下</strong> <br>
+  innerHTML</p>
+</blockquote>
+
+
+
+<h5 id="ajaxonload">ajax.onload</h5>
+
+<blockquote>
+  <p><strong>ie9以下浏览器：</strong></p>
+  
+  <p><strong>onreadystatechange</strong>  当 readyState改变的时候触发</p>
+  
+  <p><strong>ajax.readyState</strong> 可以查看当前走到哪部</p>
+  
+  <p>0  （初始化） 没还有调用open()法 <br>
+  1  （载入） 已调用send()方法，正在发送请求 <br>
+  2  （载入完成） send()方法完成，正在发送请求 <br>
+  3  （解析）正在解析响应内容 <br>
+  4  （完成）响应内容解析完成，可以在客户端调用了 <br>
+  检测ajax已经执行到哪一步了，每步都会检测 <br>
+  第一步 0 <br>
+  最后一步是4 （所有步骤都走完） <br>
+  0-3没意义  0是检测不到的 ？？</p>
+  
+  <p>如果将ajax.onreadystatechange放到send的上面，那么在IE下可以多监控一步，能监控4步</p>
+</blockquote>
+
+
+
+<h5 id="http状态码">http状态码</h5>
+
+<blockquote>
+  <p><strong>status</strong> 服务器状态</p>
+  
+  <p>2开头的为成功（200-206之间） <br>
+  3开头的为重定向 <br>
+  4开头的为失败 <br>
+  5,6开头的为服务器错误  （打死后端就好）</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs stylus"><span class="hljs-keyword">if</span> (ajax<span class="hljs-selector-class">.readyState</span> == <span class="hljs-number">4</span>) {<br>    <span class="hljs-keyword">if</span> （ajax<span class="hljs-selector-class">.status</span> &gt;= <span class="hljs-number">200</span> &amp;&amp; ajax<span class="hljs-selector-class">.status</span> &lt;= <span class="hljs-number">206</span>）{<br>        alert(ajax.responseText)<br>    }<br>} <span class="hljs-keyword">else</span> {<br>    alert(<span class="hljs-string">"出错,Err:"</span> + ajax.status)<br>}<br></code></pre>
+
+
+
+<h5 id="open的第三个参数">open的第三个参数</h5>
+
+<blockquote>
+  <p>是否异步</p>
+  
+  <p>同步：从上往下依次执行，只有前面那个走完，后面才能走</p>
+  
+  <p>异步：不用从上往下依次执行，不用等前面的执行完，才能执行</p>
+</blockquote>
+
+
+
+<h5 id="上传下载">上传下载</h5>
+
+<blockquote>
+  <p>ajax的缺点： 没有返回键</p>
+  
+  <p>在上传的时候，通过上传元素下有个属性files，这个属性就是要上传的数据</p>
+  
+  <p>var val = files.files[0];</p>
+  
+  <p>new FormData();</p>
+  
+  <p>readAsBinaryString  转成二进制</p>
+</blockquote>
+
+<p><strong>ajax.upload.onprogress</strong></p>
+
+<blockquote>
+  <p>监控上传的速度</p>
+  
+  <p>e.loaded   每次上传的大小 <br>
+  e.total    总大小</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs actionscript">ajax.upload.onprogress = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span></span>{<br>    (e.loaded / e.total) * nuber + <span class="hljs-string">"px"</span><br>}<br></code></pre>
+
+<p><strong>ajax.onprogress</strong></p>
+
+<blockquote>
+  <p>可以检测下载进度，但是因为前端不能操作本地文件，所以没什么卵用</p>
+</blockquote>
+
+
+
+<h5 id="跨域源-不同源就是跨域">跨域（源）：  （不同源就是跨域）</h5>
+
+<blockquote>
+  <p><strong>源：同源策略</strong> <br>
+  对于上网来说，最重要的是安全问题，而整个上网都是建立在同源策略基础之上</p>
+  
+  <p>同源策略是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响，<strong>可以说Web是构建在同源策略的基础之上的，浏览器只是针对同源策略的一种实现</strong></p>
+  
+  <p><strong>同源：</strong></p>
+  
+  <p><strong>同协议：</strong> <br>
+  如果后端文件的协议与打开页面的协议不一致，就跨域 <br>
+  <strong>同端口：</strong> <br>
+  默认端口80 <br>
+  <strong>同域名</strong> <br>
+  域名：给ip取了个别名（好记） <br>
+  www.baidu.com <br>
+  119.75.2177.109</p>
+  
+  <p>file协议：本地协议 <br>
+  http协议/https(安全证书)：超文本传输协议（HTTP,HyprText Transfer Protocal）是互联网上应用最为广泛的一种网络协议，最初的目的是为了一种发布和接收HTML页面的方法</p>
+</blockquote>
+
+
+
+<h5 id="解决跨域的方式">解决跨域的方式：</h5>
+
+<blockquote>
+  <p><strong>1. html5的ajax对象(XMLHttpRequest) + 后端给的一个权限</strong></p>
+  
+  <p>XMLHttpRequest()高版本浏览器才支持，在IE下支持下面这种特性(没有升级处理)</p>
+  
+  <p>IE下用XDomainRequest() 与 ActiveX相比简陋（只有两种状态，跨域和不跨域） <br>
+  XDomainRequest  IE6下不支持，实测不能用onreadystatechange。要用onload</p>
+  
+  <p><strong>2. 服务器代理</strong></p>
+  
+  <p>通过一个后端文件代理来访问所需要的跨域数据，本服务器又能访问这个后端文件解决跨域问题</p>
+  
+  <p><strong>3. flash</strong></p>
+  
+  <p><strong>4. iframe src=”“</strong>   5%几率遇到   遇到打死后端</p>
+  
+  <p><strong>5. jsonp</strong></p>
+  
+  <p><strong>jsonp就是 “json + padding”</strong>  <br>
+  内填充的json格式数据就是jsonp</p>
+  
+  <p><strong>ajax格式的数据jsonp一定用不了</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript">$.ajax({<br>    <span class="hljs-attr">dataType</span>: <span class="hljs-string">"jsonp"</span>,<br>    <span class="hljs-attr">url</span>: <span class="hljs-string">"1.php?callback=fn&amp;num=number"</span><br>    success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">json</span>) </span>{<br><br>    }<br>})<br></code></pre>
+
+<p><strong>为什么fn必须放在全局？</strong></p>
+
+<blockquote>
+  <p>因为通过jsonp请求数据的时候，回调函数是在全局通用，如果fn没在全局，调用的时候就找不到这个函数了（要报错）</p>
+  
+  <p>当发送一次请求，只要服务器返回一个回调函数式的数据，正好也有函数去接受，什么时候删除都可以，问题是不能保证发送完这次请求，一定为回调函数式的数据，有可能在服务器处理数据的时候，出错了，导致返回的数据不是回调函数式的数据，那么就不会调用。</p>
+  
+  <p>callback 解决了函数名冲突的问题，不会出现请求多个数据执行一个函数的问题</p>
+</blockquote></div></body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html><html><head><title>兼容</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="兼容">兼容</h3>
+
+<p><strong>getByClassName</strong></p>
+
+<blockquote>
+  <p>选择class的 <br>
+  IE9以下浏览器不兼容</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getByCLass</span><span class="hljs-params">(str,parent)</span> </span>{<br>    <span class="hljs-keyword">parent</span> = <span class="hljs-keyword">parent</span>?<span class="hljs-keyword">parent</span>:document<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">parent</span>.getElementsByClassName) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>.getElementsByClassName(str);<br>    } <span class="hljs-keyword">else</span> {<br>        <span class="hljs-keyword">var</span> arr = [];<br>        <span class="hljs-keyword">var</span> aEle = <span class="hljs-keyword">parent</span>.getElementsByClassName(<span class="hljs-string">"*"</span>);<br>        <span class="hljs-keyword">var</span> re = <span class="hljs-keyword">new</span> RegExp(<span class="hljs-string">'\\b'</span>+str+<span class="hljs-string">'\\b'</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; aEle.length; i++) {<br>            arr.push(aEle[i]);<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>}<br><br><span class="hljs-keyword">var</span> li1 = getByClassName(<span class="hljs-string">"li1"</span>,ul)<br></code></pre>
+
+<p><strong>querySelector</strong>    <strong>querySelectorAll</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">querySelector</span><span class="hljs-params">(parent,str)</span> </span>{<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">parent</span>.querySelector) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>.querySelectior(str)<br>    } <span class="hljs-keyword">else</span> {<br>        <span class="hljs-keyword">var</span> sele = str.substring(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)<br>        sitch(sele) {<br><br>    }<br>}<br></code></pre>
+
+<p><strong>getComputedStyle(obj)[attr]</strong></p>
+
+<blockquote>
+  <p>动态获取计算后的样式</p>
+  
+  <p>注意: 获取的时候一定要设置意个默认值</p>
+  
+  <p>css3获取的是矩阵（不能直接找到想要的值，除非做处理）</p>
+  
+  <p>当某元素加上css3的东西，获取到的数值会不准确。比如：scale</p>
+</blockquote>
+
+<p><strong>cssText</strong></p>
+
+<blockquote>
+  <p>批量设置css样式，注意：设置的时候会将之后行间的样式覆盖</p>
+</blockquote>
+
+<p><strong>setAttribute:</strong></p>
+
+<blockquote>
+  <p>设置自定义的数据</p>
+  
+  <p>在高版本浏览器下通过setAttribute去设置样式，是可以的(也会将之后行间的样式覆盖)</p>
+  
+  <p>但是在IE7以下是不兼容的，可以改变行间属性，但是不会更改样式(包括保留字(如：class，在低版本下用className) )</p>
+  
+  <p>getAttribute(“src”),ie7下默认不支持，可以传第二个参数为2</p>
+</blockquote>
+
+<p><strong>trim</strong></p>
+
+<blockquote>
+  <p>trim在IE8以下浏览器不兼容</p>
+</blockquote>
+
+<p><strong>forEach</strong></p>
+
+<blockquote>
+  <p>forEach是HTML5的新方法</p>
+  
+  <p>IE9以下浏览器不兼容</p>
+</blockquote>
+
+<p><strong>firstElementChild</strong>  高版本浏览器</p>
+
+<p><strong>firstChild</strong> 低版本浏览器</p>
+
+<blockquote>
+  <p>和第一个子节点一样的特性</p>
+</blockquote>
+
+<p><strong>nextElementSibling</strong></p>
+
+<p><strong>nextSibling</strong></p></div></body></html>

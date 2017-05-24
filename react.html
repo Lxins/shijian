@@ -28,16 +28,26 @@
 
 <p><strong>用法</strong></p>
 
-<ol><li rel="1"><p>引入2个js库 <br>
-react , react-dom , browser</p></li>
-<li rel="2"><p>创建组件 <br>
-React.createElement(“标签”，{需要设置的属性},内容)</p></li>
-<li rel="3"><p>插入 <br>
-ReactDOM.render(组件，显示和i在哪个元素中，渲染完成的回掉函数)</p></li>
-</ol>
+<blockquote>
+  <ol><li rel="1"><p>引入2个js库 <br>
+  <strong>react , react-dom , browser</strong></p></li>
+  <li rel="2"><p>创建组件 <br>
+  <strong>React.createElement(“标签”，{需要设置的属性},内容)</strong></p></li>
+  <li rel="3"><p>插入 <br>
+  <strong>ReactDOM.render(组件，显示和i在哪个元素中，渲染完成的回掉函数)</strong></p></li>
+  </ol>
+</blockquote>
 
-<p><strong>jsx语法 -&gt; js + xml</strong></p>
 
-<p><strong>创建组件开头 一定要大写</strong></p>
 
-<p><strong>注意: 如果有多个标签进行嵌套，那么</strong></p></div></body></html>
+<h4 id="jsx语法-js-xml">jsx语法 -&gt; js + xml</h4>
+
+<blockquote>
+  <p><strong>browser.js将jsx语法转化为javascript这样才会被浏览器正常解析</strong></p>
+  
+  <p><strong>JSX是React编写组件的一种语法规范，可以看为是js的扩展，它支持将HTML和JS混写在一起，最后编译为常规的js，方便浏览器解析</strong></p>
+  
+  <p><strong>创建组件开头 一定要大写</strong></p>
+  
+  <p><strong>注意：如果有多个标签进行嵌套，那么语法只支持顶层有一个标签，如果要使用多个标签，那么应该将多个标签用一个顶层标签包裹。</strong></p>
+</blockquote></div></body></html>

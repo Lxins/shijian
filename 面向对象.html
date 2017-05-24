@@ -48,6 +48,8 @@
   <p>对象和对象是不相等的   [] != [];</p>
 </blockquote>
 
+
+
 <h4 id="原型">原型：</h4>
 
 <blockquote>
@@ -62,6 +64,8 @@
   
   <p>当一个函数被申明的时候，该函数下默认有一个属性：prototype，（该属性的值是一个<strong>对象</strong>）当我们去调用一个对象的属性或者方法的时候，如果该对象自身没有该属性或者方法，则会调用到该对象的构造函数下的prototype下面属性或者方法</p>
 </blockquote>
+
+
 
 <h4 id="原型链">原型链 ：</h4>
 
@@ -87,6 +91,8 @@
   <p>Array.say -&gt; Array.<strong>proto</strong> -&gt; Function.prototype</p>
 </blockquote>
 
+
+
 <h4 id="包装对象">包装对象</h4>
 
 <blockquote>
@@ -104,6 +110,8 @@
   
   <p>内置的对象  String 、Number 、Boolean</p>
 </blockquote>
+
+
 
 <h5 id="包装对象的特点">包装对象的特点：</h5>
 
@@ -127,7 +135,7 @@
   
   <p>解决：通过循环，将对象中每个简单类型赋值给另一个对象，就不会出现引用关系。   for in</p>
   
-  <p><em>* 写个函数，只要是复合类型，就继续循环，否则直接赋值*</em></p>
+  <p><strong>写个函数，只要是复合类型，就继续循环，否则直接赋值</strong></p>
   
   <h5 id="call">call：</h5>
   

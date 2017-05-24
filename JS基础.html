@@ -6,6 +6,10 @@
 
 <h3 id="js基础">JS基础</h3>
 
+<p><strong>“use strict”  严格模式，默认保护全局变量的window，this为undefined</strong></p>
+
+<p><strong>如果使用箭头函数，那么箭头函数中是指向上一层（如果没有上一层（被函数所包裹），那么指向window），箭头函数只找上一层</strong></p>
+
 <p><strong>JS组成:</strong></p>
 
 <blockquote>
@@ -119,13 +123,13 @@ window.onload 页面加载完成</p>
   <p>循环</p>
 </blockquote>
 
-<pre class="prettyprint hljs-dark"><code class="hljs autoit"><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &lt; <span class="hljs-number">0</span>) {<br>    <span class="hljs-built_in">now</span> = length - <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>}<br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &gt; length - <span class="hljs-number">1</span>) {<br>    <span class="hljs-built_in">now</span> = <span class="hljs-number">0</span><span class="hljs-comment">;</span><br>}<br></code></pre>
+<pre class="prettyprint hljs-dark"><code class="hljs vbscript"><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &lt; <span class="hljs-number">0</span>) {<br>    <span class="hljs-built_in">now</span> = length - <span class="hljs-number">1</span>;<br>}<br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &gt; length - <span class="hljs-number">1</span>) {<br>    <span class="hljs-built_in">now</span> = <span class="hljs-number">0</span>;<br>}<br></code></pre>
 
 <blockquote>
   <p>顺序</p>
 </blockquote>
 
-<pre class="prettyprint hljs-dark"><code class="hljs autoit"><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &lt; <span class="hljs-number">0</span>) {<br>    <span class="hljs-built_in">now</span> = <span class="hljs-number">0</span><span class="hljs-comment">;</span><br>}<br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &gt; length - <span class="hljs-number">1</span>) {<br>    <span class="hljs-built_in">now</span> = length - <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>}<br></code></pre>
+<pre class="prettyprint hljs-dark"><code class="hljs vbscript"><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &lt; <span class="hljs-number">0</span>) {<br>    <span class="hljs-built_in">now</span> = <span class="hljs-number">0</span>;<br>}<br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">now</span> &gt; length - <span class="hljs-number">1</span>) {<br>    <span class="hljs-built_in">now</span> = length - <span class="hljs-number">1</span>;<br>}<br></code></pre>
 
 <blockquote>
   <p><strong>判断数据类型 typeof</strong></p>
@@ -168,7 +172,7 @@ parseFLoat();</p>
 
 <p><strong>设置时间</strong></p>
 
-<pre class="prettyprint hljs-dark"><code class="hljs lasso"><span class="hljs-built_in">var</span> <span class="hljs-built_in">date</span> = <span class="hljs-literal">new</span> <span class="hljs-built_in">Date</span>();<br>    <span class="hljs-built_in">var</span> year = <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getFullYear();  <span class="hljs-comment">//获取年份</span><br><br>    <span class="hljs-built_in">var</span> month = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getMonth() + <span class="hljs-number">1</span>);   <span class="hljs-comment">//获取月份</span><br><br>    <span class="hljs-built_in">var</span> date2 = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getDate());    <span class="hljs-comment">//获取日期</span><br><br>    <span class="hljs-built_in">var</span> hours = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getHours());   <span class="hljs-comment">//获取时</span><br><br>    <span class="hljs-built_in">var</span> minutes = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getMinutes());   <span class="hljs-comment">//获取分</span><br><br>    <span class="hljs-built_in">var</span> seconds = tob(<span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getSeconds());   <span class="hljs-comment">//获取秒</span><br><br>    <span class="hljs-built_in">var</span> day = <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getDay();    <span class="hljs-comment">//获取星期</span><br></code></pre>
+<pre class="prettyprint hljs-dark"><code class="hljs lasso"><span class="hljs-built_in">var</span> <span class="hljs-built_in">date</span> = <span class="hljs-literal">new</span> <span class="hljs-built_in">Date</span>();<br>    <span class="hljs-built_in">var</span> year = <span class="hljs-built_in">date</span>.getFullYear();  <span class="hljs-comment">//获取年份</span><br><br>    <span class="hljs-built_in">var</span> month = tob(<span class="hljs-built_in">date</span>.getMonth() + <span class="hljs-number">1</span>);   <span class="hljs-comment">//获取月份</span><br><br>    <span class="hljs-built_in">var</span> date2 = tob(<span class="hljs-built_in">date</span>.getDate());    <span class="hljs-comment">//获取日期</span><br><br>    <span class="hljs-built_in">var</span> hours = tob(<span class="hljs-built_in">date</span>.getHours());   <span class="hljs-comment">//获取时</span><br><br>    <span class="hljs-built_in">var</span> minutes = tob(<span class="hljs-built_in">date</span>.getMinutes());   <span class="hljs-comment">//获取分</span><br><br>    <span class="hljs-built_in">var</span> seconds = tob(<span class="hljs-built_in">date</span>.getSeconds());   <span class="hljs-comment">//获取秒</span><br><br>    <span class="hljs-built_in">var</span> day = <span class="hljs-built_in">date</span>.getDay();    <span class="hljs-comment">//获取星期</span><br></code></pre>
 
 <p><strong>math</strong></p>
 
@@ -186,7 +190,7 @@ parseFLoat();</p>
   <p>取最大值 Math.max(nub,nub)；return 2个nub中最大的值</p>
 </blockquote>
 
-<pre class="prettyprint hljs-dark"><code class="hljs stylus"><span class="hljs-tag">var</span> m = Math<span class="hljs-class">.max</span><span class="hljs-class">.apply</span>(null,arr)  求数组中最大值 <span class="hljs-function"><span class="hljs-title">null</span><span class="hljs-params">(只要是对象就行)</span></span><br></code></pre>
+<pre class="prettyprint hljs-dark"><code class="hljs stylus"><span class="hljs-selector-tag">var</span> m = Math<span class="hljs-selector-class">.max</span><span class="hljs-selector-class">.apply</span>(null,arr)  求数组中最大值 null(只要是对象就行)<br></code></pre>
 
 <blockquote>
   <p>取最小值 Math.min(nub,nub)；return 2个nub中最小的值</p>

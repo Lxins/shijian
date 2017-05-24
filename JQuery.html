@@ -1,10 +1,10 @@
-<!DOCTYPE html><html><head><title>JQuery：</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+<!DOCTYPE html><html><head><title>JQuery</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
                         
                     
 
 
 
-<h3 id="jquery">JQuery：</h3>
+<h3 id="jquery">JQuery</h3>
 
 <blockquote>
   <p>js方法库，集成了许多解决问题的方法{ 提供强大的选择器、简洁的API、优雅的链式、便捷的操作}</p>
@@ -191,4 +191,32 @@
   <p><strong>先将ul缓冲起来，再通过find查找</strong></p>
 </blockquote>
 
-<pre class="prettyprint hljs-dark"><code class="hljs xquery">var <span class="hljs-variable">$ul</span> = $(<span class="hljs-string">"ul"</span>)<br></code></pre></div></body></html>
+<pre class="prettyprint hljs-dark"><code class="hljs stylus"><span class="hljs-selector-tag">var</span> <span class="hljs-variable">$ul</span> = $(<span class="hljs-string">"ul"</span>)<br></code></pre>
+
+
+
+<h4 id="jq插件">JQ插件：</h4>
+
+<p><strong>插件：</strong> <br>
+辅助型的，扩充或者完善（优化）的一类 <br>
+插件：就是一些软件的</p>
+
+<p><strong>组件</strong> <br>
+能够多次重复使用的一类</p>
+
+<p><strong>分为两类</strong> </p>
+
+<ol><li rel="1"><p>静态插件(类级别)，扩展在jQuery工具方法上的一种叫工具型的</p>
+
+<blockquote>
+  <p><span>$</span>.ajax()、<span>$</span>.each()、$.isFunction()</p>
+</blockquote></li>
+<li rel="2"><p>动态插件(对象级)，扩展在jQuery对象方法上一类叫做功能型的：</p>
+
+<blockquote>
+  <p><span>$</span>(“div”).css、<span>$</span>(“div”).height()</p>
+</blockquote></li>
+</ol>
+
+<p><strong>因为JQ的方法很有局限性，不能满足所有需求，所以提供了extend对外提供一个可以扩充的接口，方便开发者对JQ的功能进行扩展</strong> <br>
+$.extend();</p></div></body></html>
