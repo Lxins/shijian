@@ -1,0 +1,477 @@
+<!DOCTYPE html><html><head><title>ES6</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="es6">ES6</h3>
+
+
+
+<h4 id="let和const"><strong>let和const</strong></h4>
+
+<blockquote>
+  <p><strong>let</strong>:   用来声明一个变量，和var非常类似 <br>
+  <strong>const</strong>： 用来声明一个常量，常量就是不可变化的量</p>
+</blockquote>
+
+<p><strong>let注意事项</strong></p>
+
+<blockquote>
+  <p><strong>let声明变量只在命令所在代码块有效</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs clojure">{<br>    let a = <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>    console.log(<span class="hljs-name">a</span>)<span class="hljs-comment">;</span><br>}<br></code></pre>
+
+<blockquote>
+  <p><strong>let声明变量在预解析度时候不会被提升</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs gauss"><span class="hljs-comment">// 错误</span><br>console.<span class="hljs-built_in">log</span>(a)<br><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">// let a = 10;</span><br><span class="hljs-comment">// function fn() {</span><br><span class="hljs-comment">//  a = 5;    // 暂时性死区</span><br><span class="hljs-comment">//  let a = 2;</span><br><span class="hljs-comment">// }</span><br><span class="hljs-comment">// fn();</span><br><br><span class="hljs-comment">// 正确</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;<br>console.<span class="hljs-built_in">log</span>(a)<br></code></pre>
+
+<blockquote>
+  <p><strong>let不允许在同一个作用域下声明已存在的变量</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs cs"><span class="hljs-comment">// 错误</span><br><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;<br><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;<br></code></pre>
+
+<p><strong>let 在 for 循环中的应用</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-comment">// index</span><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; btns.length; i++) {<br>    btns[i].index = i;<br>    btns[i].onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.index)<br>    }<br>}<br><br><span class="hljs-comment">// 闭包</span><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; btns.length; i++) {<br>    (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">i</span>) </span>{<br>      btns[i].onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>        <span class="hljs-built_in">console</span>.log(i)<br>      }<br>    })(i)<br>}<br><br><span class="hljs-comment">// let</span><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; btns.length; i++) {<br>    btns[i].onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>      <span class="hljs-built_in">console</span>.log(i)<br>    }<br>}<br></code></pre>
+
+<p><strong>在循环语句之内是一个父作用域，在循环体之中是一个子作用域。</strong></p>
+
+<blockquote>
+  <p>“const”:  拥有let的特点 而且 <strong>声明必须赋值</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs actionscript"><span class="hljs-comment">// 错误</span><br><span class="hljs-keyword">const</span> c;<br></code></pre>
+
+<blockquote>
+  <p><strong>声明的常量存储简单的数据类型时候不可改变其值，如果储存的是对象，那么引用不可被改变，至于对象里面的数据如何变化，是没有关系的</strong> </p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs delphi"><span class="hljs-comment">// 错误</span><br><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;<br><br>a = <span class="hljs-comment">{}</span>;<br><br><span class="hljs-comment">// 正确</span><br><span class="hljs-keyword">const</span> obj = <span class="hljs-comment">{a: 10}</span>;<br><br>obj.a = <span class="hljs-number">20</span>; <span class="hljs-comment">// 修改的是obj中的数据 没有修改常量</span><br></code></pre>
+
+
+
+<h4 id="解构赋值">解构赋值</h4>
+
+<p><strong>本质上就是一种匹配模式，只要等号两边的模式相同，那么左边的变量就可以被赋予对应的值。</strong></p>
+
+<blockquote>
+  <p>数组解构赋值</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs inform7">let <span class="hljs-comment">[a, b, c]</span> = <span class="hljs-comment">[1, 2, 3]</span><br><br>let <span class="hljs-comment">[a, <span class="hljs-comment">[<span class="hljs-comment">[b]</span>, c]</span>]</span> = <span class="hljs-comment">[1, <span class="hljs-comment">[<span class="hljs-comment">[2]</span>, 3]</span>]</span><br><br>let <span class="hljs-comment">[, , c]</span> = <span class="hljs-comment">[1, 2, 3]</span>;<br>console.log(c); // 3<br><br>let <span class="hljs-comment">[x]</span> = <span class="hljs-comment">[]</span>;<br>console.log(x); // undefined<br><br>let <span class="hljs-comment">[y = 1]</span> = <span class="hljs-comment">[]</span>;<br>console.log(y); // 1<br></code></pre>
+
+<blockquote>
+  <p>对象的解构赋值</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy">let {a, b} = {<span class="hljs-string">b:</span> <span class="hljs-string">'bbb'</span>, <span class="hljs-string">a:</span> <span class="hljs-string">'aaa'</span>};<br><br>let {<span class="hljs-string">a:</span> b} = {<span class="hljs-string">a:</span> <span class="hljs-number">1</span>};<br>console.log(b); <span class="hljs-comment">// 1</span><br>console.log(a); <span class="hljs-comment">// a is not defined</span><br></code></pre>
+
+<blockquote>
+  <p>基本类型的解构赋值</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">let</span> [a, b, c] = <span class="hljs-string">'1234'</span>;<br><span class="hljs-built_in">console</span>.log(a, b, c, d); <span class="hljs-comment">// 1, 2, 3, 4</span><br><br><span class="hljs-keyword">let</span> {<span class="hljs-attr">length</span>: len} = <span class="hljs-string">"lxin"</span>;<br><span class="hljs-built_in">console</span>.log(len); <span class="hljs-comment">// 4</span><br><br><span class="hljs-keyword">let</span> {<span class="hljs-attr">toString</span>: ts} = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">let</span> {<span class="hljs-attr">toString</span>: bs} = <span class="hljs-literal">true</span>;<br><span class="hljs-built_in">console</span>.log(ts) <span class="hljs-comment">// function toString() {}     ts === Number.prototype.toString</span><br><span class="hljs-built_in">console</span>.log(bs) <span class="hljs-comment">// function toString() {}     bs === Boolean.prototype.toString</span><br><br><span class="hljs-comment">// 错误</span><br><span class="hljs-keyword">let</span> [a] = <span class="hljs-literal">null</span> <span class="hljs-comment">// null和undefined不能解构赋值</span><br></code></pre>
+
+
+
+<h4 id="数据结构-set">数据结构 Set</h4>
+
+<blockquote>
+  <p><strong>集合的基本概念：</strong>集合是由一组无序且唯一（即不能重复）的项组成的。 这个数据结构使用了与有限集合相同的数学概念，应用在计算机的数据结构中。</p>
+  
+  <p><strong>特点：</strong> key 和 value 相同，没有重复的 value</p>
+  
+  <p>ES6 提供了数据结构 Set 。它类似于数组， 但是成员的值都是唯一的， 没有重复的值。</p>
+</blockquote>
+
+<p><strong>如何创建一个 Set</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dart"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br></code></pre>
+
+<p><strong>Set 类的属性</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br><span class="hljs-built_in">console</span>.log(s.size); <span class="hljs-comment">// 3</span><br></code></pre>
+
+<p><strong>Set 类的方法</strong></p>
+
+<blockquote>
+  <p>set.add(value) // 添加一个数据，返回Set结构本身。</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs cs"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> Set([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br>s.<span class="hljs-keyword">add</span>(<span class="hljs-string">'a'</span>).<span class="hljs-keyword">add</span>(<span class="hljs-string">'b'</span>).<span class="hljs-keyword">add</span>(<span class="hljs-string">'c'</span>);<br></code></pre>
+
+<blockquote>
+  <p>set.delete(value) 删除指定数据，返回一个布尔值， 表示删除是否成功。</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs cpp"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> Set([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br>console.<span class="hljs-built_in">log</span>(s.<span class="hljs-keyword">delete</span>(<span class="hljs-number">1</span>)) <span class="hljs-comment">// true</span><br></code></pre>
+
+<blockquote>
+  <p>set has(value) 判断该值是否为Set的成员，返回一个布尔值。</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br><span class="hljs-built_in">console</span>.log(s.has(<span class="hljs-number">5</span>)); <span class="hljs-comment">// false</span><br><span class="hljs-built_in">console</span>.log(s.has(<span class="hljs-number">1</span>)); <span class="hljs-comment">// true</span><br></code></pre>
+
+<blockquote>
+  <p>set.clear() 清楚所有数据，没有返回值</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs dart"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br>s.clert() <span class="hljs-comment">// 清空</span><br></code></pre>
+
+<blockquote>
+  <p>keys() 返回键名得遍历器</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br><span class="hljs-built_in">console</span>.log(s.keys());<br></code></pre>
+
+<blockquote>
+  <p>values()  返回键值得遍历器</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-selector-tag">console</span><span class="hljs-selector-class">.log</span>(<span class="hljs-selector-tag">s</span><span class="hljs-selector-class">.values</span>())<br></code></pre>
+
+<blockquote>
+  <p>entries() 返回键值对的遍历器</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br><span class="hljs-built_in">console</span>.log(s.entries());<br></code></pre>
+
+<blockquote>
+  <p>forEach() 使用回调函数遍历每个成员</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br>s.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, key, set</span>) </span>{<br>    <span class="hljs-comment">// 对应 键值, 键名, set本身</span><br>    <span class="hljs-built_in">console</span>.log(value + <span class="hljs-string">'lxin'</span>);<br>    <span class="hljs-comment">// 数据结构本身不发生改变</span><br>})<br></code></pre>
+
+<p><strong>Set 不允许有重复的数据         可以用来去重</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs lsl">const s = new Set([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br>s.add(<span class="hljs-number">1</span>) <span class="hljs-comment">// 不生效</span><br></code></pre>
+
+
+
+<h4 id="数据结构-map">数据结构 Map</h4>
+
+<p><strong>字典数据结构： 是用来存储不重复key的hash结构。不同于集合(Set)的是，字典使用的是[键, 值]的形式来存储数据的</strong></p>
+
+<p><strong>JavaScript 的对象 (Objec: {}) 只能用字符串当作键。 这给它的使用带来了很大的限制</strong></p>
+
+<p><strong>为了解决这个问题， ES6提供了Map数据结构。 它类似于对象，也是键值对的集合，但是”键“的范围不限于字符串， 各种类型的值（包括对象）都可以当作键。也就是说，Object结构提供了”字符串-值“ 的对应，Map结构提供了”值-值“的对应，是一种更完善的Hash结构实现。 如果需要”键值对“的数据结构， Map比Object更合适</strong></p>
+
+<p><strong>创建一个 Map</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-built_in">map</span> = <span class="hljs-keyword">new</span> Map({<br>    [<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>],<br>    [<span class="hljs-string">'b'</span>, <span class="hljs-number">2</span>]<br>});<br></code></pre>
+
+<p><strong>Map 类的属性</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs processing"><span class="hljs-keyword">const</span> <span class="hljs-built_in">map</span> = <span class="hljs-keyword">new</span> Map({<br>    [<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>],<br>    [<span class="hljs-string">'b'</span>, <span class="hljs-number">2</span>]<br>});<br>console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">map</span>.<span class="hljs-built_in">size</span>); <span class="hljs-number">2</span><br></code></pre>
+
+<p><strong>Map 类的方法</strong></p>
+
+<blockquote>
+  <p>set(key, value) 设置键名key对应的键值为value，然后返回整个 Map 结构。 如果key已有值，则键值会被更新，否则就新生成该键</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs lasso"><span class="hljs-built_in">map</span>.<span class="hljs-built_in">set</span>(<span class="hljs-string">'lxin'</span>, <span class="hljs-string">'baba'</span>).<span class="hljs-built_in">set</span>(<span class="hljs-string">'new'</span>, <span class="hljs-string">'yz'</span>).<span class="hljs-built_in">set</span>(<span class="hljs-string">'lxin'</span>, <span class="hljs-string">'lxs'</span>);<br></code></pre>
+
+<blockquote>
+  <p>get(key) get方法读取key对应的键值，如果找不到key，返回undefined</p>
+  
+  <p>delete(key) 删除某个键，返回true。 如果删除失败，返回false。</p>
+  
+  <p>has(key) 方法返回一个布尔值，表示某个键是否在当前 Map 对象之中</p>
+  
+  <p>cler() 清除所有数据，没有返回值。</p>
+  
+  <p>keys() 返回键名的遍历器</p>
+  
+  <p>values() 返回键值的遍历器</p>
+  
+  <p>entries() 返回键值对待遍历器</p>
+  
+  <p>forEach() 使用回调函数遍历每个成员</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs processing"><span class="hljs-keyword">const</span> <span class="hljs-built_in">map</span> = <span class="hljs-keyword">new</span> Map({<br>    [<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>],<br>    [<span class="hljs-string">'b'</span>, <span class="hljs-number">2</span>]<br>});<br><br><span class="hljs-built_in">map</span>.forEach(function(<span class="hljs-built_in">key</span>, value, <span class="hljs-built_in">map</span>) {<br>    console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">key</span>+ <span class="hljs-string">':'</span> + value);  <br>})<br></code></pre>
+
+<p><strong>Map中NaN是一个对象</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs cpp"><span class="hljs-built_in">map</span>.<span class="hljs-built_in">set</span>(NaN, <span class="hljs-number">10</span>).<span class="hljs-built_in">set</span>(NaN, <span class="hljs-number">10086</span>);<br>console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">map</span>) <span class="hljs-comment">// NaN为10086</span><br></code></pre>
+
+<p><strong>对象不等于对象</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><span class="hljs-selector-tag">map</span><span class="hljs-selector-class">.set</span>({}, <span class="hljs-string">'l'</span>)<span class="hljs-selector-class">.set</span>({}, <span class="hljs-string">'x'</span>);<br><span class="hljs-selector-tag">console</span><span class="hljs-selector-class">.log</span>(map); <span class="hljs-comment">// 两个对象都会添加进去</span><br><br><span class="hljs-selector-tag">console</span><span class="hljs-selector-class">.log</span>({} === {}); <span class="hljs-comment">// false 比较的是内存地址， 而你是值</span><br></code></pre>
+
+<p><strong>map里面的key的排列顺序是按照添加顺序进行排列的。</strong></p>
+
+
+
+<h4 id="iterator和forof循环">Iterator和for…of循环</h4>
+
+<p><strong>基本概念：</strong></p>
+
+<blockquote>
+  <p><strong>在ES6中新增了Set 和Map 两种数据结构，再加上JS之前原有的数组和对象，这样就有了四种数据集合，平时还可以组合使用它们， 定义自己的数据结构， 比如数组的成员是Map， Map的成员是对象等。 这样就需要一种统一的接口机制， 来处理所有不同的数据结构</strong></p>
+  
+  <p><strong>Iterator就是这样一种机制。它是一种接口，为各种不同的数据结构提供统一的访问机制。 任何数据结构只要部署Iterator接口， 就可以完成遍历操作， 而且这种遍历操作上 【依次】  处理该数据结构的所有成员</strong></p>
+</blockquote>
+
+<p><strong>Iterator遍历器的作用：</strong></p>
+
+<blockquote>
+  <p>为各种数据结构， 提供一个统一的、简便的访问接口。</p>
+  
+  <p>使得数据结构的所有成员都能按某种次序排列</p>
+  
+  <p>ES6新增了遍历命令for…of，Iterator接口主要提供for…of消费</p>
+</blockquote>
+
+<p><strong>Iterator 接口</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>,, <span class="hljs-number">3</span>];<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iterator</span>(<span class="hljs-params">arr</span>) </span>{<br>    <span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">return</span> {<br>        <span class="hljs-attr">next</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>            <span class="hljs-keyword">return</span> index &lt; arr.length?<br>            {<span class="hljs-attr">value</span>: arr[index++], <span class="hljs-attr">done</span>: <span class="hljs-literal">false</span>}:<br>            {<span class="hljs-attr">value</span>: <span class="hljs-literal">undefined</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">true</span>};<br>        }<br>    }<br>}<br><br><span class="hljs-keyword">const</span> it = iterator(arr);<br><br><span class="hljs-built_in">console</span>.log(it.next()); <span class="hljs-comment">// 1</span><br><span class="hljs-built_in">console</span>.log(it.next()); <span class="hljs-comment">// 2</span><br><span class="hljs-built_in">console</span>.log(it.next()); <span class="hljs-comment">// 3</span><br><span class="hljs-built_in">console</span>.log(it.next()); <span class="hljs-comment">// undefined</span><br></code></pre>
+
+<p><strong>Iterator的遍历过程：</strong></p>
+
+<blockquote>
+  <p>创建一个指针对象， 指向当前数据结构的起始位置。 也就是说， 遍历器对象本质上， 就是一个指针对象</p>
+  
+  <p>第一次调用指针对象的next方法， 可以将指针指向数据结构的第一个成员。</p>
+  
+  <p>第二次调用指针对象的next方法， 指针就指向数据结构的第二个成员</p>
+  
+  <p>不断调用指针对象的next方法， 直到它指向数据结构的结束位置。</p>
+  
+  <p>每一次调用next方法， 都会返回数据结构的当前成员的信息。 具体来说， 就是返回一个包含value和done两个属性的对象。 其中， value属性是当前成员的值， done属性是一个布尔值，表示遍历是否结束 </p>
+</blockquote>
+
+<p><strong>凡是具有 Symbol.iterator 属性的数据结构都具有 Iterator</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<br><span class="hljs-keyword">const</span> set = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>]);<br><span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>([[<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>]]);<br><span class="hljs-keyword">const</span> obj = {};<br><br><span class="hljs-comment">// 具有</span><br><span class="hljs-built_in">console</span>.log(arr[<span class="hljs-built_in">Symbol</span>.iterator]);<br><span class="hljs-built_in">console</span>.log(set[<span class="hljs-built_in">Symbol</span>.iterator]);<br><span class="hljs-built_in">console</span>.log(map[<span class="hljs-built_in">Symbol</span>.iterator]);<br><br><span class="hljs-comment">// 不具有</span><br><span class="hljs-built_in">console</span>.log(obj[<span class="hljs-built_in">Symbol</span>.iterator]) <span class="hljs-comment">//undefined</span><br></code></pre>
+
+<p><strong>具备iterator接口的数据结构都可以进行【结构赋值，扩展运算符】</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs processing">let <span class="hljs-built_in">str</span> = <span class="hljs-string">'lxns'</span>;<br>console.<span class="hljs-built_in">log</span>([...<span class="hljs-built_in">str</span>]);<br><br><span class="hljs-comment">// 去重</span><br><span class="hljs-keyword">const</span> arr2 = [{}, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, [], {}];<br>console.<span class="hljs-built_in">log</span>([...<span class="hljs-keyword">new</span> Set(arr2)]);<br></code></pre>
+
+<p><strong>for…of循环</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];<br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i <span class="hljs-keyword">of</span> arr) {<br>    <span class="hljs-built_in">console</span>.log(i);<br>}<br><br><br><span class="hljs-keyword">const</span> m = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>();<br>m.set(<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>).set(<span class="hljs-string">'b'</span>, <span class="hljs-number">2</span>).set(<span class="hljs-string">'c'</span>, <span class="hljs-number">3</span>);<br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> data <span class="hljs-keyword">of</span> m) {<br>    <span class="hljs-built_in">console</span>.log(data);<br>}<br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> [key, value] <span class="hljs-keyword">of</span> m) {<br>    <span class="hljs-built_in">console</span>.log(key, value);<br>}<br></code></pre>
+
+<p><strong>对象（Object）之所以没有默认部署Iterator接口，是因为对象的哪个属性先遍历，哪个属性后遍历是不确定的，需要开发者手动指定。本质上，遍历器是一种线性处理，对于任何非线性的数据结构，部署遍历器接口，就等于部署一种线性转换。不过，严格地说，对象部署遍历器接口并不是很必要，因为这时对象实际上被当作Map结构使用，ES5没有Map结构，而ES6原生提供了。</strong></p>
+
+
+
+<h4 id="class-语法">class 语法</h4>
+
+<p><strong>JS语言的传统方法是通过构造函数， 定义并生成新对象， 是一种基于原型的面向对象系统。 这种写法跟传统的面向对象语言（比如C++和Java）差异很大， 很容易让新学习这门语言的人感到困惑，所有， 在ES6中新增加了类的概念， 可以使用calss 关键字声明一个类， 之后以这个类来实例化对象。</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Lxins</span> </span>{<br>    <span class="hljs-keyword">constructor</span>(a, b) {<br>        <span class="hljs-keyword">this</span>.a = a;<br>        <span class="hljs-keyword">this</span>.b = b;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;<br>    }<br><br>    print() {<br>        console.log(<span class="hljs-keyword">this</span>.a + <span class="hljs-string">' '</span> + <span class="hljs-keyword">this</span>.b);<br>    }<br>};<br>const lxins = new Lxins(<span class="hljs-string">'hello'</span>, <span class="hljs-string">'laoge'</span>).print();<br></code></pre>
+
+<blockquote>
+  <p>class语法 定义“类”的方法的时候，前面不需要加function，并且方法之间不需要加逗号</p>
+  
+  <p>定义在类中的方法都不可以枚举的</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.keys(Lxins.prototype)) <span class="hljs-comment">// 为空数组</span><br></code></pre>
+
+<blockquote>
+  <p>constructor 方法是类的默认方法， 通过new命令生成对象实例时， 自动调用该方法。 一个类必须有constructor方法， 如果没有显示定义， 一个空的constructor方法会被默认添加</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs actionscript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">P</span> </span>{};<br><span class="hljs-keyword">const</span> p = <span class="hljs-keyword">new</span> P();<br></code></pre>
+
+<blockquote>
+  <p>生成类的实例对象的写法，与ES5完全相同， 也适用new命令</p>
+</blockquote>
+
+
+
+<h4 id="class的继承">class的继承</h4>
+
+<p><strong>子类继承父类，使用 extends 关键字</strong></p>
+
+<p><strong>为父类指定静态方法， 使用 static 方法名字</strong></p>
+
+<p><strong>super：</strong></p>
+
+<blockquote>
+  <p>在构造函数中可以当以供函数来使用， 相当于调用父类的构造函数</p>
+  
+  <p>在原型方法中， 可以当以供对象来使用， 相当于父类的原型对象， 并且会自动绑定this到子类上 </p>
+</blockquote>
+
+
+
+<h4 id="symbol">Symbol</h4>
+
+<p><strong>Symbol，表示独一无二的值。 它是JS中的第七种数据类型</strong></p>
+
+<blockquote>
+  <p>基本的数据类型： Null Undefined Number Boolean String Symbol</p>
+  
+  <p>引用数据类型： Object </p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">let</span> s1 = <span class="hljs-built_in">Symbol</span>();<br><span class="hljs-keyword">let</span> s2 = <span class="hljs-built_in">Symbol</span>();<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> s1); <span class="hljs-comment">// 'symbol'</span><br><br><span class="hljs-built_in">console</span>.log(s1 === s2);  <span class="hljs-comment">// false</span><br></code></pre>
+
+<p><strong>Symbol 函数前不能使用 new 否则会报错， 原因在于 Symbol 是一个原始类型的值， 不是对象</strong></p>
+
+<p><strong>Symbol 函数接受一个字符串作为参数， 表示Symbol的描述，主要是为了在控制台显示， 或者转为字符串的时候， 比较容易区分</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">let</span> s3 = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'Lxin'</span>);<br><span class="hljs-built_in">console</span>.log(s3); <span class="hljs-comment">// Symbol(Lxin); </span><br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'lxin'</span>) ==== <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'lxin'</span>)); <span class="hljs-comment">// false    字符串只是描述</span><br></code></pre>
+
+<p><strong>Symbol 数据类型的转换</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">String</span>(<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'lxin'</span>))); <span class="hljs-comment">// Symbol(lxin)</span><br><br><span class="hljs-built_in">console</span>.log((<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'lxin'</span>).toString())); <span class="hljs-comment">// Symbol(lxin)</span><br><br><span class="hljs-built_in">console</span>.log(!!<span class="hljs-built_in">Symbol</span>); <span class="hljs-comment">// true</span><br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>(<span class="hljs-built_in">Symbol</span>())); <span class="hljs-comment">// 报错  不能转换数字</span><br><br><span class="hljs-built_in">console</span>.log(Stmbol(<span class="hljs-string">'lx'</span>) + <span class="hljs-string">'bb'</span>); <span class="hljs-comment">// 报错  不能拼接</span><br><br><span class="hljs-built_in">console</span>.log(Stmbol(<span class="hljs-string">'lx'</span>) * <span class="hljs-number">100</span>); <span class="hljs-comment">// 报错  不能运算</span><br></code></pre>
+
+<p><strong>作为对象的属性名</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">let</span> lx = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'lx'</span>);<br><br><span class="hljs-keyword">const</span> obj = {};<br><br>obj[lx] = <span class="hljs-string">'hello'</span>;<br><br><span class="hljs-built_in">console</span>.log(obj[lx]); <span class="hljs-comment">// hello</span><br><br><br><span class="hljs-comment">// 问题</span><br><br><span class="hljs-keyword">const</span> data = {<br>    [<span class="hljs-built_in">Symbol</span>()]: <span class="hljs-number">123</span>,<br>    <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>,<br>    <span class="hljs-attr">b</span>: <span class="hljs-number">2</span><br>};<br><br><span class="hljs-built_in">console</span>.log(data[<span class="hljs-built_in">Symbol</span>()]); <span class="hljs-comment">//undefined  必须用变量记录下  否则无法获取到对应的值</span><br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i <span class="hljs-keyword">in</span> data) {<br>    <span class="hljs-built_in">console</span>.log(i) <span class="hljs-comment">// a b;  不能被for... in循环遍历， 虽然不能被遍历， 但是也不是私有属性， 可以通过Object.getOwnPropertySymbols 方法获取一个对象的所有Symbol 属性</span><br>}<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getOwnPropertySymbols(data)); <span class="hljs-comment">// [Symbol()]</span><br><br><span class="hljs-built_in">console</span>.log(data[<span class="hljs-built_in">Object</span>.getOwnPropertySymbols(data)[<span class="hljs-number">0</span>]]); <span class="hljs-comment">// 123 </span><br></code></pre>
+
+
+
+<h4 id="内置对象的扩展">内置对象的扩展</h4>
+
+<p><strong>字符串的扩展</strong></p>
+
+<blockquote>
+  <p><strong>模板字符串</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs coffeescript">   let flag = <span class="hljs-literal">true</span>;<br>  let html = `<span class="javascript">&lt;ul&gt;<br>                <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>${'首页'}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>                &lt;li <span class="hljs-class"><span class="hljs-keyword">class</span> </span>= <span class="hljs-string">"${flag ? 'show' : 'hide'}"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>                &lt;li&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>                &lt;li&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>                &lt;li&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br>          &lt;<span class="hljs-regexp">/ul&gt;</span></span>`;<br></code></pre>
+
+<blockquote>
+  <p><strong>repeat</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">let</span> str1 = <span class="hljs-string">'a'</span>;<br><span class="hljs-keyword">let</span> str2 = str1.repeat(<span class="hljs-number">3</span>);<br><br><span class="hljs-built_in">console</span>.log(str2); <span class="hljs-comment">// aaa</span><br></code></pre>
+
+<blockquote>
+  <p><strong>includes() startsWith() endsWith()</strong></p>
+</blockquote>
+
+<p><strong>includes(‘str)</strong>  查看是否有’str’这个字符串   是就返回 true <br>
+<strong>startsWith(str)</strong>  查看开头是否有’str’这个字符 串 是就返回 true <br>
+<strong>endsWith</strong>   查看结尾是否有’str’这个字符串 是就返回 true</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs processing">let <span class="hljs-built_in">str</span> = <span class="hljs-string">'lxins'</span>;<br><br>console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">str</span>.includes(<span class="hljs-string">'ao'</span>)); <span class="hljs-comment">//true</span><br></code></pre>
+
+<p><strong>数组的扩展</strong></p>
+
+<blockquote>
+  <p>Array.from()   把类数组转换成数组</p>
+  
+  <p>Array.of()   创建一个数组</p>
+  
+  <p>find() findIndex()   对数组进行筛选</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];<br><br><span class="hljs-keyword">let</span> res = arr.find(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>) </span>{<br>    <span class="hljs-keyword">return</span> a &lt; <span class="hljs-number">2</span>;<br>})<br><br><span class="hljs-built_in">console</span>.log(res) <span class="hljs-comment">// 1  没找到返回undefined</span><br><br><br><span class="hljs-keyword">let</span> res = arr.findIndex(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>) </span>{<br>    <span class="hljs-keyword">return</span> a &lt; <span class="hljs-number">2</span>;<br>})<br><br><span class="hljs-built_in">console</span>.log(res) <span class="hljs-comment">// 0  没找到返回-1</span><br></code></pre>
+
+<blockquote>
+  <p>fill()  给数组填充</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs lsl">const arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];<br><br>arr.fill('a', <span class="hljs-number">1</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// 不写范围就全部替换</span><br><br>console.log(arr); <span class="hljs-comment">// 1, 'a', 'a', 4</span><br></code></pre>
+
+<p><strong>对象的扩展</strong></p>
+
+<blockquote>
+  <p><strong>对象的简洁表示法</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;<br><br><span class="hljs-keyword">const</span> obj = {<br>    a    <span class="hljs-comment">// ES6;   a: a ES5</span><br>}<br><br><span class="hljs-keyword">const</span> obj = {<br><span class="hljs-comment">// ES5</span><br>    fn: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);<br>    },<br><span class="hljs-comment">// ES6 </span><br>    fn2() {<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);<br>    }<br>}<br></code></pre>
+
+<blockquote>
+  <p>Object.is()   判断两个数据是否一样  一样返回true    (必须长的一样)</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.is(<span class="hljs-literal">NaN</span>, <span class="hljs-literal">NaN</span>)); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.is(+<span class="hljs-number">0</span>, <span class="hljs-number">-0</span>)); <span class="hljs-comment">//false</span><br></code></pre>
+
+<blockquote>
+  <p>Object.assign()  用于对象的合并，将源对象的所有可枚举属性，复制到目标对象。</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><span class="hljs-keyword">let</span> obj1 = {a: <span class="hljs-number">1</span>};<br><span class="hljs-keyword">let</span> obj2 = {a：<span class="hljs-number">2</span>, b: <span class="hljs-number">3</span>};<br><span class="hljs-keyword">let</span> obj3 = {c: <span class="hljs-string">'abc'</span>};<br><br>Object.assign(obj1, obj2, obg3);<br><br>console.log(obj1); // {a: <span class="hljs-number">2</span>, b: <span class="hljs-number">3</span>, c: <span class="hljs-string">'abc'</span>}<br></code></pre>
+
+<h4 id="函数扩展">函数扩展</h4>
+
+<p><strong>为函数参数指定默认值</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs gauss"> function <span class="hljs-function"><span class="hljs-keyword">fn</span><span class="hljs-params">(a = <span class="hljs-number">10</span>, b = <span class="hljs-number">20</span>)</span> {<br>     console.<span class="hljs-built_in">log</span><span class="hljs-params">(a + b)</span><br> }<br> <span class="hljs-keyword">fn</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 30</span><br> <span class="hljs-function"><span class="hljs-keyword">fn</span><span class="hljs-params">(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)</span></span>; <span class="hljs-comment">// 10</span><br></code></pre>
+
+<p><strong>函数的 rest 参数</strong> <br>
+<em>rest 参数形式为(“…变量名”)，用于获取函数的多余参数，这样就 不需要使用arguments对象了。 rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中</em></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs actionscript"><span class="hljs-comment">// arguments</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">var</span> args = arguments;<br>    <span class="hljs-keyword">var</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; args.length; i++) {<br>        res += args[i];<br>    }<br>    console.log(res)<br>}<br><br>sum(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">//25</span><br><br><br><span class="hljs-comment">// rest</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum</span><span class="hljs-params">(a, <span class="hljs-rest_arg">...arr</span>)</span> </span>{ <span class="hljs-comment">// rest参数之前可以指定其他参数 a  **不能在后面指定参数**</span><br>    <span class="hljs-keyword">var</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) {<br>        res += arr[i];<br>    }<br>    console.log(res)<br>}<br><br>sum(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">//25</span><br></code></pre>
+
+<p><strong>箭头函数 =&gt;</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"> <span class="hljs-comment">// 一个参数</span><br><br> <span class="hljs-keyword">const</span> fn = <span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> a;<br><br> <span class="hljs-keyword">const</span> fn2 = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>) </span>{<br>   <span class="hljs-keyword">return</span> a;<br> };<br><br><span class="hljs-built_in">console</span>.log(fn(<span class="hljs-number">1</span>), fn(<span class="hljs-number">2</span>)) <span class="hljs-comment">//1 2</span><br><br><span class="hljs-comment">// 多个参数</span><br><br><span class="hljs-keyword">const</span> fn = <span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a + b;<br><br><span class="hljs-built_in">console</span>.log(fn(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)); <span class="hljs-comment">// 3</span><br><br><span class="hljs-comment">// 多行代码</span><br><br><span class="hljs-keyword">const</span> fn = <span class="hljs-function">(<span class="hljs-params">a , b</span>) =&gt;</span> {<br>  a = a * <span class="hljs-number">2</span>;<br>  b = b * <span class="hljs-number">2</span>;<br>  <span class="hljs-keyword">return</span> a + b;<br>}<br><br><span class="hljs-built_in">console</span>.log(fn(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)); <span class="hljs-comment">// 6</span><br><br><span class="hljs-comment">// 返回对象</span><br><br><span class="hljs-keyword">const</span> fn = <span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> ({a, b});<br><br><span class="hljs-built_in">console</span>.log(fn(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)); <span class="hljs-comment">// a = 1 b = 2</span><br><br><span class="hljs-comment">// 箭头函数排序</span><br><br><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">-1</span>];<br><br>arr.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br><br><span class="hljs-built_in">console</span>.log(arr); [<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]<br></code></pre>
+
+<p><strong>箭头函数事项</strong></p>
+
+<blockquote>
+  <p>箭头函数体内没有自己的this对象， 所以在使用的时候， 其内部的this就是定义所在环境的对象， 而不是使用时所在环境的对象。<strong>不能给箭头函数使用 call  apply  bind  去改变其内部的this指向</strong></p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-comment">// this指向问题</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>{<br>  setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);<br>  },<span class="hljs-number">1000</span>);<br>  setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);<br>  },<span class="hljs-number">1000</span>);<br>}<br><br><span class="hljs-keyword">var</span> obj = {<span class="hljs-attr">a</span>: <span class="hljs-number">1</span>};<br><br>fn.call(obj); <span class="hljs-comment">// window, obj</span><br></code></pre>
+
+<blockquote>
+  <p>箭头函数体内没有arguments 对象，如果要用， 可以使用 Rest 参数替代。</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs gauss"> const <span class="hljs-function"><span class="hljs-keyword">fn</span> = <span class="hljs-params">(...arr)</span> =&gt; arr</span>;<br><br> console.<span class="hljs-built_in">log</span>(<span class="hljs-function"><span class="hljs-keyword">fn</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)</span>)</span>;<br></code></pre>
+
+<blockquote>
+  <p>箭头函数不可以当作构造函数， 不可以使用new命令， 否则会报错</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs gauss">const <span class="hljs-function"><span class="hljs-keyword">Fn</span> = <span class="hljs-params">(a, b)</span> =&gt; a + b</span>;<br><br>const f = <span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-keyword">Fn</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span></span>;  <span class="hljs-comment">// 报错</span><br></code></pre>
+
+<blockquote>
+  <p>箭头函数不能用作Generator函数</p>
+</blockquote>
+
+
+
+<h4 id="异步操作-promise">异步操作 Promise</h4>
+
+<p><strong>Promise： 是ES6中新增的异步编程解决方法，体现在代码中它是一个对象，可以通过 Promise 构造函数来实例化</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{<br>  <span class="hljs-keyword">const</span> img = <span class="hljs-keyword">new</span> Image();<br>  img.src = url;<br>  img.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    resolve(<span class="hljs-keyword">this</span>);<br>  };<br>  img.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'图片加载失败'</span>));<br>  };<br>});  <span class="hljs-comment">// pending (进行中), Resolved(已完成)  // Rejected(已失败)</span><br></code></pre>
+
+<p><strong>两个原型方法：</strong></p>
+
+<blockquote>
+  <p>Promise.prototype.then();    then 异步操作 成功后执行的操作</p>
+  
+  <p>Pro,ise.prototype.catch();    catch 异步操作 失败后执行的操作</p>
+</blockquote>
+
+<p><strong>两个常用的静态方法：</strong></p>
+
+<blockquote>
+  <p>Promise.all();</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-keyword">const</span> allDone = <span class="hljs-built_in">Promise</span>.all([loadImg(imgs[<span class="hljs-number">0</span>]), loadImg(imgs[<span class="hljs-number">1</span>]), loadImg(imgs[<span class="hljs-number">2</span>])]);<br><br> allDone.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">datas</span>) </span>{<br>   datas.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item, i</span>) </span>{<br>     <span class="hljs-built_in">document</span>.body.appendChild(item);<br>   });<br> }).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{<br>   <span class="hljs-built_in">console</span>.log(err);<br> })<br></code></pre>
+
+<blockquote>
+  <p>Promise.resolve();</p>
+</blockquote>
+
+<p><strong>参数是Promise实例， 将不做任何修改， 原封不动地返回这个实例</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">Promise</span>.resolve(loadImg(imgs[<span class="hljs-number">0</span>])).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">img</span>) </span>{<br>   <span class="hljs-built_in">document</span>.body.appendChild(img);<br>})<br></code></pre>
+
+<p><strong>将对象转为Promise对象， 然后就立即执行thenable对象then方法</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">Promise</span>.resolve({<br>   then(resolve, reject) {<br>     <span class="hljs-keyword">const</span> img = <span class="hljs-keyword">new</span> Image();<br>     img.src = imgs[<span class="hljs-number">0</span>];<br>     img.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>       resolve(<span class="hljs-keyword">this</span>);<br>     };<br>   }<br> }).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">img</span>) </span>{<br>    <span class="hljs-built_in">document</span>.body.appendChild(img);<br> });<br></code></pre>
+
+<p><strong>参数是一个基本数据或者不传参数，那么返回一个状态为 resolved 的 Promise 对象</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><span class="hljs-built_in">Promise</span>.resolve(<span class="hljs-string">'lxins'</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">str</span>) </span>{<br>   <span class="hljs-built_in">console</span>.log(str);<br> })<br></code></pre></div></body></html>
